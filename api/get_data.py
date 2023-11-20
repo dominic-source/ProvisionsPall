@@ -1,11 +1,23 @@
 #!/usr/bin/python3
+
+"""This module helps us to get random data for our application to use
+    once the data has been got, there is no need to run the program again.
+    
+    4 files are created:
+    
+    location.json
+    product.json
+    store.json
+    user.json
+"""
+
 import requests
 import json
 import uuid
 
-def create_data():
+def create_data(length=1, example=True):
     """Create temporary data for our database and for testing purposes"""
-    resp = requests.get('https://randomuser.me/api/?page=1&results=100&seed=abc')
+    resp = requests.get(f'https://randomuser.me/api/?results={length}')
 
     if resp.status_code != requests.codes.ok:
         print("No response")
@@ -54,15 +66,22 @@ def create_data():
             'Category': data_entry.get('nat')
         }
         product.append(info_product)
+    
+    # to add examples instead
+    if example:
+        ex = '.example'
+    else:
+        ex = ''
 
-    with open('user.json', 'w', encoding='utf-8') as fd:
+    filename = 'data_for_testing/{}{}.json'
+    with open(filename.format('user', ex), 'w', encoding='utf-8') as fd:
         json.dump(user, fd)
-    with open('store.json', 'w', encoding='utf-8') as fd2:
+    with open(filename.format('store', ex), 'w', encoding='utf-8') as fd2:
          json.dump(store, fd2)
-    with open('location.json', 'w', encoding='utf-8') as fd3:
+    with open(filename.format('location', ex), 'w', encoding='utf-8') as fd3:
          json.dump(location, fd3)
-    with open('product.json', 'w', encoding='utf-8') as fd4:
+    with open(filename.format('product', ex), 'w', encoding='utf-8') as fd4:
         json.dump(product, fd4)
 
 if __name__ == '__main__':
-    create_data()
+    create_data(length=1000, example=False)

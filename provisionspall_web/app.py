@@ -24,7 +24,7 @@ def dashboard():
 
     return render_template('dashboard.html')
 
-@app.route('/store', strict_slashses=False)
+@app.route('/store', strict_slashes=False)
 def store():
     """To help us render the store page"""
 
