@@ -1,0 +1,204 @@
+/* Mobile Styles (up to 767px) */
+/* Apply mobile-specific styles here */
+:root {
+    --primary-color: #1abc9c;
+    /* Turquoise */
+    --secondary-color: #16a085;
+    /* Green Sea */
+    --accent-color: #2ecc71;
+    /* Emerald */
+}
+
+.body-overflow {
+    overflow: hidden;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Dashboard section */
+.dashboard {
+    position: absolute;
+    top: 30%;
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+}
+.dashboard_action, .create_products, .view_products{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 250px;
+}
+
+.label_me {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+}
+
+
+.style_input {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    max-width: 200px;
+    max-height: 150px;
+    border-radius: 3.5px;
+    border: 1px var(--accent-color) solid;
+    padding: 5px;
+}
+
+.style_input:focus, .style_input:hover {
+    outline-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.submit_button {
+    max-width: 70px;
+    background-color: var(--primary-color);
+    margin: 10px;
+}
+/* User details section*/
+aside#blur {
+    background-color: var(--accent-color);
+    position: absolute;
+    top: 0px;
+    height: 1000px;
+    width: 100%;
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    z-index: 3;
+}
+#close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-weight: bolder;
+}
+
+hr {
+    width: 150px;
+    border: 1px var(--accent-color) solid;
+}
+.invisible {
+    display: none;
+}
+
+.opacity {
+    opacity: 0.7;
+}
+
+.style_button {
+    border-radius: 3.5px;
+    border: 1px var(--secondary-color) solid;
+    box-shadow: 0.5px 0.3px 0.1px var(--accent-color);
+}
+.user {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+    height: 500px;
+    border: 1px var(--secondary-color) solid;
+    border-radius: 20px;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    z-index: 3;
+}
+
+.user_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-content: space-between;
+    height: 100px;
+}
+.user_container button, .submit_button {
+    font-size: 9px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 20px;
+    min-height: 20px;
+}
+
+.user_container button:hover,
+#close:hover, .submit_button:hover {
+    color: white;
+    background-color: var(--accent-color);
+}
+
+.user_details {
+    height: 400px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.user_details h2 {
+    font-size: 20px;
+}
+
+.user_details h3 {
+    font-size: 17px;
+}
+
+.user_details h4 {
+    font-size: 15px;
+}
+
+.user_image {
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.user_image_normal {
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.user_image_normal:hover {
+    opacity: 0.7;
+    background-color: var(--secondary-color);
+}
+
+/* Tablet Styles (768px - 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* Apply tablet-specific styles here */
+
+    /* Dashboard section */
+    .dashboard {
+        top: 150px;
+    }
+    .user {
+        left: 150px;
+        margin: 25px;
+        width: 350px;
+        height: 350px;
+    }
+  
+    .user_container button {
+        min-height: 30px;
+        min-width: 30px;
+        font-size: 12px;
+    }
+    .user_container {
+        height: 150px;
+    }
+    .user_image_normal {
+    
+        height: 75px;
+        width: 75px;
+    }
+}

@@ -8,7 +8,9 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         <!-- CSS and JS script element for the dashboard-->
+        <link href="../static/styles/dashboard-mobile.css" rel="stylesheet">
         <link href="../static/styles/dashboard.css" rel="stylesheet">
+
         <script src="../static/scripts/dashboard.js" defer></script>
 
         <!-- CSS and JS script element for geolocating store -->
@@ -37,47 +39,96 @@
         <header>
 
         </header>
-
-        <main>
             <nav>
 
             </nav>
-            <section>
-            <aside id="aside">
-                <aside id="blur"></aside>
-                <div class="user">
-                <img src="../static/images/chinonso.jpg" 
-                    alt="Here is the user's picture" 
-                    width="100px" 
-                    height="100px"
-                    class="user_image">
-                <div class="user_details"> 
-                    <h2>USER DETAILS</h2>
-                    <h4>User name: Chinonso</h4>
-                    <h4>Company name: Cadaservices</h4>
-                    <h4>Number of stores: 4</h4>
-                    <h4>Number of Products: 1200</h4>
-                    <h3>Current location of stores</h3>
-                    <ul>
-                        <li>Lagos Nigeria</li>
-                        <li>Abuja Nigeria</li>
-                        <li>Minna, Niger State</li>
-                    </ul>
-
-                </div>
-            </div>
-            </aside>
+            <section role="navigation" style="max-height: 30%;">
+                <nav class="user_container">
+                    <img src="../static/images/CaadatechMachieFLyer.jpg" 
+                        alt="Here is the user's picture" 
+                        class="user_image_normal">
+                    <nav role="navigation">
+                        <button id="view" class="style_button">View user</button>
+                        <button id="edit" class="style_button">Edit store details</button>
+                        <button id="produce" class="style_button">View products </button>
+                        <button id="create" class="style_button">Create products</button>
+                    </nav>
+                    <hr/>
+                </nav>
+                <aside id="aside" class="invisible">
+                    <aside id="blur" class="opacity"></aside>
+                    <div class="user">
+                        <img src="../static/images/chinonso.jpg" 
+                        alt="Here is the user's picture" 
+                        width="100px" 
+                        height="100px"
+                        class="user_image">
+                        <button id="close" class="style_button">close</button>
+                        <div class="user_details"> 
+                            <h2>USER DETAILS</h2>
+                            <h4>User name: Chinonso</h4>
+                            <h4>Company name: Cadaservices</h4>
+                            <h4>Number of stores: 4</h4>
+                            <h4>Number of Products: 1200</h4>
+                            <h3>Current location of stores</h3>
+                            <ul>
+                                <li>Lagos Nigeria</li>
+                                <li>Abuja Nigeria</li>
+                                <li>Minna, Niger State</li>
+                                <li>Lagos Nigeria</li>
+                                <li>Abuja Nigeria</li>
+                                <li>Minna, Niger State</li>
+                                <li>Lagos Nigeria</li>
+                                <li>Abuja Nigeria</li>
+                                <li>Minna, Niger State</li>
+                            </ul>
+                        </div>
+                        <hr/>
+                    </div>
+                </aside>
         </section>
-            <section>
+        <main class="style_button dashboard" role="presentation">
 
+            <section class="dashboard_action invisible" role="form" aria-label="Edit store details">
+                <h4> Edit store details:</h4>
+                <label for="my_id" class="label_me"> 
+                    <h5>Store name: Morba Chinonso </h5>
+                    <button class="style_button submit_button open" data-id="my_id">edit</button>
+                </label>
+                <input class="style_input invisible" value type="text" 
+                    name="store name" aria-label="type the product name here" 
+                    placeholder="Type the name of the store" id="my_id">  
+                     
+                <button id="submit" class="style_button submit_button">Save</button>         
+            </section>
+               
+            
+            <section class="view_products invisible" role="form" aria-label="Edit store details">
+                    <h4> View Products:</h4>
+                    <label for="my_id3" class="label_me"> 
+                        <h5>Store name: Morba Chinonso </h5>
+                        <button class="style_button submit_button open" data-id="my_id3">edit</button>
+                    </label>
+                    <input class="style_input invisible" value type="text" 
+                        name="store name2" aria-label="type the product name here" 
+                        placeholder="Type the name of the store" id="my_id3">  
+                         
+                    <button id="submit2" class="style_button submit_button">Save</button>         
             </section>
 
-            <section>
 
+            <section class="create_products invisible" role="form" aria-label="Edit store details">
+                    <h4> Create Products:</h4>
+                    <label for="my_id4" class="label_me"> 
+                        <h5>Store name: Morba Chinonso </h5>
+                        <button class="style_button submit_button open" data-id="my_id4">edit</button>
+                    </label>
+                    <input class="style_input invisible" value type="text" 
+                        name="store name" aria-label="type the product name here" 
+                        placeholder="Type the name of the store" id="my_id4">       
+                    <button id="submit3" class="style_button submit_button">create</button>         
             </section>
-
         </main>
-        
        <footer>
 
         <address></address>
