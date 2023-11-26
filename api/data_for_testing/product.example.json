@@ -1,1 +1,20 @@
-[{"id": "9641832c-6ccf-4370-83aa-f6ec5815bf4a", "user_id": "9f07341f-c7e6-45b7-bab0-af6de5a4582d", "store_id": "9f07341f-c7e6-45b7-bab0-af6de5a4582d", "name": "PPS", "Description": "Brussels, Copenhagen, Madrid, Paris", "Category": "IE"}]
+[
+    {
+        "id": "783bde81-fa31-4d33-b45d-2c502cded78a",
+        "user_id": "6d9a629c-9dcd-429f-a986-c5ec5bef1d3a",
+        "store_id": "6d9a629c-9dcd-429f-a986-c5ec5bef1d3a",
+        "name": "CPR",
+        "Description": "Abu Dhabi, Muscat, Baku, Tbilisi",
+        "Category": "DK",
+        "unit price": 56,
+        "price per dozen": 672,
+        "price per pack": 1680,
+        "price per carton": 2240,
+        "price per cup": 5.6,
+        "price per congo": 224,
+        "price per bag": 5600,
+        "price per basin": 2240,
+        "cost price": 1680,
+        "profit": 224
+    }
+]

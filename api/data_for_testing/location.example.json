@@ -1,1 +1,12 @@
-[{"street": {"number": 2479, "name": "Henry Street"}, "city": "Blessington", "state": "Wexford", "country": "Ireland", "postcode": 78276, "coordinates": {"latitude": "2.0565", "longitude": "95.2422"}, "timezone": {"offset": "+1:00", "description": "Brussels, Copenhagen, Madrid, Paris"}}]
+[
+    {
+        "id": 6318,
+        "store_id": "6d9a629c-9dcd-429f-a986-c5ec5bef1d3a",
+        "house number": 81673,
+        "street name": "Kløvermarken",
+        "area": null,
+        "city": "Brøndby Strand",
+        "state": "Nordjylland",
+        "country": "Denmark"
+    }
+]
