@@ -2,39 +2,46 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ProvisionsPall</title>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="../static/scripts/googleapi.js" defer></script>
-        
-        <!-- Leaflet CSS -->
-         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-         crossorigin=""/>
-        
-         <!-- Leaflet JavaScript -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="This is the webpage that provides direction to store">
+        <meta name="author" content="Morba Chinonso">
 
-        <!-- OpenRouteService plugin -->
-        <script src="https://unpkg.com/leaflet-routing-machine@5.3.14/dist/leaflet-routing-machine.js"></script>
+        <meta property="og:title" content="This will help you locate your store">
+        <meta property="og:description"
+            content="This is the webpage that provides direction to store">
+        <meta property="og:image"
+            content="URL to an image associated with the content">
+        <meta property="og:url" content="www.ProvisionsPall.com">
+
+        <title>ProvisionsPall</title>
+
+        <link rel="stylesheet" href="../static/styles/store.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="../static/scripts/geolocate.js" defer></script>
+
+        <!-- Replace 'YOUR_API_KEY' with your actual Google Maps API key -->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDELz1heH2E822I_OHIGNVOuvHwxIAEZ50&callback=initMap"
+            async></script>
+
     </head>
     <body>
         <header>
-            <h1>I am at the top but God is everything.</h1>
+            <h4>ProvisionsPall map</h4>
         </header>
-        <section>
-            <p>We are doing the best we can, may God help us</p>
+        <section class="selection" role="searchbox"
+            aria-label="Select your current address">
+            <label for="address">Enter your address</label>
+            <input type="text" name="address" id="address"
+                aria-label="enter your address" value="default" />
         </section>
-        <footer>
-            <div id="map"
-                style='height: 500px; width: 500px;'
-                data-id="1224" 
-                data-name="chinonso" 
-                data-location="current">
-            </div>
-            <h3>It is nice down here</h3>
-        </footer>
-       
+
+        <section class="map_area">
+            <div id="map"></div>
+        </section>
+
+        <footer></footer>
+
     </body>
 </html>

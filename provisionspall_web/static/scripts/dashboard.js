@@ -47,24 +47,32 @@ $(function () {
     $(".create_products").addClass("invisible");
     sendRequest(url + "/store").done(function (response) {
       // Remove all forms
-      $(
-        ".dashboard_action h4, .dashboard_action label, .dashboard_action input"
-      ).remove();
+      $(".dashboard_action").empty();
 
       // Add data
+      $(".dashboard_action").append(
+        "<h4 id='up'> Edit store details details:</h4>"
+      );
       for (let info of response) {
-        let element = `<label for="${info.id}" class="label_me"> 
-            <h5>Store name: ${info.name} </h5>
-            <button class="style_button submit_button open" data-id="${info.id}">edit</button>
+        let elem = `<h5>Store name: ${info.name} </h5>`;
+        $(".dashboard_action").append(elem);
+        for (let data in info) {
+          let randomId = generateUUID();
+          let element = `<label for="${randomId}" class="label_me"> 
+          <h6>${data}: ${info[data]}</h6>
+            <button class="style_button submit_button open" data-id="${randomId}">edit</button>
             </label>
-            <input class="style_input invisible" value type="text" 
-                name="${info.name}" aria-label="${info.description}" 
-                placeholder="Type here" id="${info.id}">`;
+            <input class="style_input invisible" value=${info[data]} type="text" 
+                name="${data}" aria-label="${info.description}" 
+                id="${randomId}">`;
 
-        $(".dashboard_action").prepend(element);
+          $(".dashboard_action").append(element);
+        }
+        $(".view_products").append("<hr />");
       }
-      $(".dashboard_action").prepend("<h4> Edit store details details:</h4>");
-
+      $(".dashboard_action").append(
+        '<a href="#submit" class="end">bottom</a><a href="#up" class="top">top</a><button id="submit" class="style_button submit_button">Save</button>'
+      );
       $(".dashboard_action .open").on("click", function () {
         if ($(this).html() === "edit") {
           $(this).html("close");
@@ -92,12 +100,10 @@ $(function () {
 
     sendRequest(url + "/products").done(function (response) {
       // Remove all forms
-      $(
-        ".view_products h4, .view_products label, .view_products button, .view_products input, .view_products h5"
-      ).remove();
+      $(".view_products").empty();
 
       // Add data
-      $(".view_products").append("<h4> View all products</h4>");
+      $(".view_products").append("<h4 id='top'> View all products</h4>");
 
       for (let info of response) {
         products[info["id"]] = {};
@@ -117,7 +123,7 @@ $(function () {
         $(".view_products").append("<hr />");
       }
       $(".view_products").append(
-        '<button id="submit2" class="style_button submit_button">Save</button>'
+        '<a href="#submit2" class="end">bottom</a><a href="#top" class="top">top</a><button id="submit2" class="style_button submit_button">Save</button>'
       );
 
       $(".view_products .open").on("click", function () {
@@ -146,48 +152,44 @@ $(function () {
     $(".dashboard_action").addClass("invisible");
     $(".create_products").toggleClass("invisible");
 
-    sendRequest(url + "/products").done(
-      function (info) {
-        // Remove all forms
-        $(
-          ".create_products h4, .create_products label, .create_products input"
-        ).remove();
-        $(".create_products").append("<h4> Add a new product:</h4>");
+    sendRequest(url + "/products").done(function (info) {
+      // Remove all forms
+      $(".create_products").empty();
+      $(".create_products").append("<h4 id='upper'> Add a new product:</h4>");
 
-        // Add data
-        for (let data in info[7]) {
-          let randomId = generateUUID();
-          let element = `<label for="${randomId}" class="label_me"> 
+      // Add data
+      for (let data in info[7]) {
+        let randomId = generateUUID();
+        let element = `<label for="${randomId}" class="label_me"> 
            </label>
            <input class="style_input" value type="text" 
                name="${data}" aria-label="This is where you type ${data}" 
                placeholder="Type the ${data} here" id="${randomId}">`;
 
-          $(".create_products").append(element);
-        }
-        $(".create_products").append(
-          '<button id="submit3" class="style_button submit_button">create</button>'
-        );
-
-        $(".create_products .open").on("click", function () {
-          if ($(this).html() === "edit") {
-            $(this).html("close");
-            $("#" + $(this).attr("data-id")).removeClass("invisible");
-          } else {
-            $(this).html("edit");
-            $("#" + $(this).attr("data-id")).addClass("invisible");
-          }
-        });
-
-        // create product
-        $(".create_products input").on("change", function () {
-          products[$(this).attr("name")] = $(this).val();
-        });
-        $("#submit3").on("click", function () {
-          $(".create_products input").val("");
-          console.log(products);
-        });
+        $(".create_products").append(element);
       }
-    );
+      $(".create_products").append(
+        '<a href="#submit3" class="end">bottom</a><a href="#upper" class="top">top</a><button id="submit3" class="style_button submit_button">create</button>'
+      );
+
+      $(".create_products .open").on("click", function () {
+        if ($(this).html() === "edit") {
+          $(this).html("close");
+          $("#" + $(this).attr("data-id")).removeClass("invisible");
+        } else {
+          $(this).html("edit");
+          $("#" + $(this).attr("data-id")).addClass("invisible");
+        }
+      });
+
+      // create product
+      $(".create_products input").on("change", function () {
+        products[$(this).attr("name")] = $(this).val();
+      });
+      $("#submit3").on("click", function () {
+        $(".create_products input").val("");
+        console.log(products);
+      });
+    });
   });
 });

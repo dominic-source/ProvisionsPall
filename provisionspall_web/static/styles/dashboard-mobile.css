@@ -25,11 +25,44 @@ button {
     margin: 10px;
     width: 80%;
 }
-.dashboard_action, .create_products, .view_products{
+
+.dashboard_action,
+.create_products,
+.view_products {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 250px;
+    width: 300px;
+}
+
+.dashboard_action h4,
+.create_products h4,
+.view_products h4 {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.dashboard_action h5,
+.create_products h5,
+.view_products h5 {
+    color: var(--primary-color);
+    font-size: 15px;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.dashboard_action h6,
+.create_products h6,
+.view_products h6 {
+    font-size: 10px;
+    margin: 0px;
+    font-weight: lighter;
+}
+
+.end {
+    position: fixed;
+    bottom: 40px;
+    right: 60px;
 }
 
 .label_me {
@@ -51,7 +84,8 @@ button {
     padding: 5px;
 }
 
-.style_input:focus, .style_input:hover {
+.style_input:focus,
+.style_input:hover {
     outline-color: var(--accent-color);
     border-color: var(--accent-color);
 }
@@ -61,6 +95,13 @@ button {
     background-color: var(--primary-color);
     margin: 10px;
 }
+
+.top {
+    position: fixed;
+    top: 100px;
+    right: 60px;
+}
+
 /* User details section*/
 aside#blur {
     background-color: var(--accent-color);
@@ -72,10 +113,11 @@ aside#blur {
     -webkit-filter: blur(10px);
     z-index: 3;
 }
+
 #close {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
     font-weight: bolder;
 }
 
@@ -83,6 +125,7 @@ hr {
     width: 150px;
     border: 1px var(--accent-color) solid;
 }
+
 .invisible {
     display: none;
 }
@@ -96,6 +139,7 @@ hr {
     border: 1px var(--secondary-color) solid;
     box-shadow: 0.5px 0.3px 0.1px var(--accent-color);
 }
+
 .user {
     position: absolute;
     top: 10px;
@@ -123,7 +167,10 @@ hr {
     justify-content: space-between;
     height: 100px;
 }
-.user_container button, .submit_button {
+
+.user_container button,
+.submit_button,
+#close {
     font-size: 9px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 20px;
@@ -131,7 +178,8 @@ hr {
 }
 
 .user_container button:hover,
-#close:hover, .submit_button:hover {
+#close:hover,
+.submit_button:hover {
     color: white;
     background-color: var(--accent-color);
 }
@@ -181,23 +229,26 @@ hr {
     .dashboard {
         top: 150px;
     }
+
     .user {
         left: 150px;
         margin: 25px;
         width: 350px;
         height: 350px;
     }
-  
+
     .user_container button {
         min-height: 30px;
         min-width: 30px;
         font-size: 12px;
     }
+
     .user_container {
         height: 150px;
     }
+
     .user_image_normal {
-    
+
         height: 75px;
         width: 75px;
     }
