@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="This is the dashboard page which the users use to manage their product">
+        <meta name="author" content="Morba Chinonso">
+
+        <meta property="og:title" content="dashboard page for users of ProvisionsPall">
+        <meta property="og:description" content="This is the webpage for the users dashboard">
+        <meta property="og:image" content="URL to an image associated with the content">
+        <meta property="og:url" content="www.ProvisionsPall.com">
+
+
+
+        <title>ProvisionsPall</title>
+
+        <!-- Here is Jquery script element -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+        <!-- CSS and JS script element for the dashboard-->
+        <link href="../static/styles/dashboard-mobile.css" rel="stylesheet">
+        <link href="../static/styles/dashboard.css" rel="stylesheet">
+
+        <script src="../static/scripts/dashboard.js" defer></script>       
+    </head>
+    <body>
+            <section role="navigation" style="max-height: 30%;">
+                <nav class="user_container">
+                    <img src="../static/images/CaadatechMachieFLyer.jpg" 
+                        alt="Here is the user's picture" 
+                        class="user_image_normal">
+                    <nav role="navigation">
+                        <button id="view" class="style_button">View user</button>
+                        <button id="edit" class="style_button">Edit store details</button>
+                        <button id="produce" class="style_button">View products </button>
+                        <button id="create" class="style_button">Create products</button>
+                    </nav>
+                    <hr/>
+                </nav>
+                <aside id="aside" class="invisible">
+                    <aside id="blur" class="opacity"></aside>
+                    <div class="user">
+                        <img src="../static/images/chinonso.jpg" 
+                        alt="Here is the user's picture" 
+                        width="100px" 
+                        height="100px"
+                        class="user_image">
+                        <button id="close" class="style_button">close</button>
+                        <div class="user_details"> 
+                            <h2>USER DETAILS</h2>
+                            <h4>User name: Chinonso</h4>
+                            <h4>Company name: Cadaservices</h4>
+                            <h4>Number of stores: 4</h4>
+                            <h4>Number of Products: 1200</h4>
+                            <h3>Current location of stores</h3>
+                            <ul>
+                                <li>Lagos Nigeria</li>
+                                <li>Abuja Nigeria</li>
+                                <li>Minna, Niger State</li>
+                                <li>Lagos Nigeria</li>
+                                <li>Abuja Nigeria</li>
+                                <li>Minna, Niger State</li>
+                                <li>Lagos Nigeria</li>
+                                <li>Abuja Nigeria</li>
+                                <li>Minna, Niger State</li>
+                            </ul>
+                        </div>
+                        <hr/>
+                    </div>
+                </aside>
+        </section>
+        <main class="style_button dashboard" role="presentation">
+            <section class="dashboard_action invisible" role="form" aria-label="Edit store details">                
+            </section>       
+            <section class="view_products invisible" role="form" aria-label="Edit store details">     
+            </section>
+            <section class="create_products invisible" role="form" aria-label="Edit store details">       
+            </section>
+        </main>
+       <footer></footer>
+    </body>
+</html>
