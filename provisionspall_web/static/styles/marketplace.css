@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1, p, span {
+    margin-bottom: 10px;
+}
+
+.product-images {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.product-image {
+    max-width: 30%;
+    height: auto;
+}
+
+.price {
+    color: #4CAF50;
+    font-size: 1.5em;
+    font-weight: bold;
+}

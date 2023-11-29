@@ -21,9 +21,7 @@ function login(event) {
         if (!((keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122))) {
             event.preventDefault();
         }
-    });
-
-    document.getElementById('username').addEventListener('keypress', function (event) {
+    
         var keyCode = event.keyCode;
         // Allow only letters (A-Z and a-z) and numbers (0-9)
         if (!((keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (keyCode >= 48 && keyCode <= 57))) {
@@ -55,7 +53,7 @@ function login(event) {
 
     // this function handles login
     function login(event) {
-        event.preventDefault();
+        // event.preventDefault();
 
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;

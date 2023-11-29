@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <script src="login.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/styles/login.css">
 </head>
 <body>
 
     <div class="login-container">
         <h2>Login</h2>
-        <form onsubmit="login(event)" action="/login" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" pattern="[A-Za-z]+" title="Please enter only letters" required> </br>
+        <form onsubmit="login(event)" action="/login" method="post" class="container">
+        
+            <input type="text" placeholder="username" id="username" name="username" pattern="[A-Za-z]+" title="Please enter only letters" required> </br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" pattern="[A-Za-z0-9]+" title="Please enter only letters and numbers" required> </br>
+        
+            <input type="password" placeholder="password" id="password" name="password" pattern="[A-Za-z0-9]+" title="Please enter only letters and numbers" required> </br>
 
-            <label>
+            <div>
                 <input type="checkbox" id="remember" name="remember"> Remember Me
-            </label> </br>
+            </div> </br>
 
-            <button type="submit">Login</button>
+            <button type="submit" class="button">Login</button>
         </form>
     </div>
 
