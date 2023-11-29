@@ -65,6 +65,8 @@ class Store_Address(db.Model):
     area = db.Column(db.String(120), nullable=False)
     city = db.Column(db.String(120), nullable=False)
     country = db.Column(db.String(120), nullable=False)
+    longitude = db.Column(db.Integer)
+    latitude = db.Column(db.Integer)
     store_id = db.Column(db.Integer, db.ForeignKey('store.id'), nullable=False)
 
     def __repr__(self):
@@ -75,6 +77,7 @@ class Store_Address(db.Model):
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(80), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False,
