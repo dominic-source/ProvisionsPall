@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="This is the webpage that provides direction to store">
+        <meta name="author" content="Morba Chinonso">
+
+        <meta property="og:title" content="This will help you locate your store">
+        <meta property="og:description"
+            content="This is the webpage that provides direction to store">
+        <meta property="og:image"
+            content="URL to an image associated with the content">
+        <meta property="og:url" content="www.ProvisionsPall.com">
+
+        <title>ProvisionsPall</title>
+
+        <link rel="stylesheet" href="../static/styles/store.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="../static/scripts/geolocate.js" defer></script>
+
+        <!-- Replace 'YOUR_API_KEY' with your actual Google Maps API key -->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDELz1heH2E822I_OHIGNVOuvHwxIAEZ50&callback=initMap"
+            async></script>
+
+    </head>
+    <body>
+        <header>
+            <h4>ProvisionsPall map</h4>
+        </header>
+        <section class="selection" role="searchbox"
+            aria-label="Select your current address">
+            <label for="address">Enter your address</label>
+            <input type="text" name="address" id="address"
+                aria-label="enter your address" value="default" />
+        </section>
+
+        <section class="map_area">
+            <div id="map"></div>
+        </section>
+
+        <footer></footer>
+
+    </body>
+</html>
