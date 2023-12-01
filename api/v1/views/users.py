@@ -4,6 +4,9 @@
 from api.v1.views import app_views
 from flask import make_response, jsonify
 import json
+from models.model import User, User_Address, Store, Store_Address, Product
+from api.v1 import db
+
 
 @app_views.route('/', strict_slashes=False, methods=['GET'])
 @app_views.route('/users', strict_slashes=False, methods=['GET'])

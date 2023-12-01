@@ -18,28 +18,15 @@
 
         <link rel="stylesheet" href="../static/styles/store.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="../static/scripts/geolocate.js" defer></script>
-
-        <!-- Replace 'YOUR_API_KEY' with your actual Google Maps API key -->
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDELz1heH2E822I_OHIGNVOuvHwxIAEZ50&callback=initMap"
-            async></script>
 
     </head>
     <body>
-        <header>
-            <h4>ProvisionsPall map</h4>
-        </header>
-        <section class="selection" role="searchbox"
-            aria-label="Select your current address">
-            <label for="address">Enter your address</label>
-            <input type="text" name="address" id="address"
-                aria-label="enter your address" value="default" />
-        </section>
+        <div id="map"></div>
 
-        <section class="map_area">
-            <div id="map"></div>
-        </section>
+        <script src="../static/scripts/store.js" defer></script>
+
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlzfoA_Mmaf30s3EO0Zrnz28fK248nTOY&libraries=places&callback=initMap"></script>
 
         <footer></footer>
 

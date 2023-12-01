@@ -1,16 +1,13 @@
 #!/usr/bin/python3
 """This module handles the route for provisions pall"""
-from flask import Flask, render_template
+from flask import render_template, request, jsonify, make_response, redirect, url_for
+from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
+from provisionspall_web import app, db
+from models.model import User, User_Address, Store, Store_Address, Product
 
-app = Flask(__name__)
 
 cors = CORS(app, resources={r'/api/v1': {'origins': '*'}})
-
-@app.teardown_appcontext
-def close_dbs(error):
-    """Close the database"""
-    pass
 
 @app.route("/", strict_slashes=False)
 def landing_page():
@@ -18,8 +15,8 @@ def landing_page():
 
     return render_template('landing_page.html')
 
-@app.route('/dashboard', strict_slashes=False)
-def dashboard():
+@app.route('/dashboard/<id>', strict_slashes=False)
+def dashboard(id):
     """To help us render the dashboard page"""
 
     return render_template('dashboard.html')
@@ -36,11 +33,51 @@ def market():
 
     return render_template('market.html')
 
-@app.route('/login', strict_slashes=False)
+@app.route('/login', strict_slashes=False, methods=["GET", "POST"])
 def login():
     """To help us render the login page"""
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        users = db.session.query(User).all()
+        for user in users:
+            if user.username == username:
+                if user.password == password:
+                    return redirect(url_for("dashboard", id=user.id))
+                else:
+                    return jsonify({"error": "Wrong password"}), 200
+        return jsonify({"error": "Not registered"}), 200
+        
 
-    return render_template('login.html')
+@app.route('/register', strict_slashes=False, methods=["GET", "POST"])
+def register():
+    """To help us render the login page"""
+    if request.method == 'GET':
+        return render_template('register.html')
+    elif request.method == 'POST':
+        options = {
+        'username': request.form.get('username'),
+        'first_name': request.form.get('firstname'),
+        'last_name': request.form.get('lastname'),
+        'email': request.form.get('email'),
+        'password': request.form.get('password')
+        }
+        try:
+            user = User(**options)
+            db.session.add(user)
+            db.session.commit()
+
+            return redirect('/dashboard/' + str(user.id))
+        except IntegrityError as e:
+            db.session.rollback()
+           
+            return jsonify({'error': 'user already registered'})
+        except Exception as e: 
+         
+            db.session.rollback()
+            return jsonify({'error': 'An unexpected error occured'})
 
 
 if __name__ == '__main__':

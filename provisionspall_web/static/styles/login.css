@@ -1,68 +1,82 @@
-.container{
+:root {
+    --primary-color: #1abc9c;
+    /* Turquoise */
+    --secondary-color: #16a085;
+    /* Green Sea */
+    --accent-color: #2ecc71;
+    /* Emerald */
+}
+
+.container {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 300px;
-    height: 300px; 
+    max-width: 400px;
+    height: 300px;
     flex-direction: column;
 }
 
-#password, #username, #email, #confirmPassword{
-    border: 2px green solid;
-    height: 60px;
-    width: 200px;
+#password,
+#username,
+#email,
+#lastname,
+#firstname,
+#confirmPassword {
+    border: 1px var(--primary-color) solid;
+    height: 50px;
+    width: 300px;
     font-size: 20px;
     border-radius: 5px;
     margin: 10px;
+    padding-left: 10px;;
 }
 
-.container input:focus{
-    outline-color: green;
+.container input:focus {
+    outline-color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+
 }
 
 body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+}
 
-        .login-container {
-            max-width: 300px;
-            margin: auto;
-            padding: 20px;
-            background-color: #FFFFFF;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
 
-        .label {
-            display: block;
-            text-align: left;
-            margin: 10px 0 5px;
-        }
+.label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+}
 
-        .input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
+.input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
 
-        .button {
-            background-color: #4caf50;
-            color: #ffffff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            width: 70px;
-            height:40px;
-            cursor: pointer;
-        }
+.button {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    width: 70px;
+    height: 40px;
+    cursor: pointer;
+}
 
-        .button:hover{
-            opacity: 0.8;
-            width: 80px;
-            height: 50px;
-            font-size: medium;
-        }
+.button:hover, .button:focus{
+    opacity: 0.8;
+}
