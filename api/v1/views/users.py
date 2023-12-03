@@ -51,16 +51,14 @@ def create_or_update_user(id=None):
         else:
             options = {
             'username': request.form.get('username'),
-            'first_name': request.form.get('firstname'),
-            'last_name': request.form.get('lastname'),
+            'first_name': request.form.get('first_name'),
+            'last_name': request.form.get('last_name'),
             'email': request.form.get('email'),
             'password': request.form.get('password')
             }
             try:
                 data = db.session.get(User, id)
-                print(id, data.username)
                 for key, value in options.items():
-                    print(key, value)
                     if value is not None:
                         setattr(data, key, value)
                 db.session.commit()

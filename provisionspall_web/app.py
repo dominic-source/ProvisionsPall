@@ -59,8 +59,8 @@ def register():
     elif request.method == 'POST':
         options = {
         'username': request.form.get('username'),
-        'first_name': request.form.get('firstname'),
-        'last_name': request.form.get('lastname'),
+        'first_name': request.form.get('first_name'),
+        'last_name': request.form.get('last_name'),
         'email': request.form.get('email'),
         'password': request.form.get('password')
         }
