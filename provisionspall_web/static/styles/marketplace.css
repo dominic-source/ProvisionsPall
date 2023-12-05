@@ -49,3 +49,17 @@
   box-sizing: border-box;
   transition: all 0.15s;
 }
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the minimum and maximum width of each column */
+  gap: 10px; /* Adjust the gap between images */
+}
+
+/* Style for each image in the grid */
+.image-grid img {
+  width: 100%; /* Make sure each image takes up 100% of its container */
+  height: auto; /* Maintain the aspect ratio of the images */
+  border: 1px solid #ddd; /* Optional: Add a border around each image */
+  border-radius: 4px; /* Optional: Add rounded corners to each image */
+}
