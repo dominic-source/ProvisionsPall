@@ -64,9 +64,8 @@ def create_or_update_user(id=None):
                 db.session.commit()
                 return jsonify({'Message': 'User updated successfully', 'user_id': data.id}), 200
             except Exception as e:
-                print(e)
                 db.session.rollback()
-                return jsonify({'Error': 'An error was encountered'}), 404
+                return jsonify({'Error': 'An error was encountered'}), 400
        
 @app_views.route('/users', strict_slashes=False, methods=['GET'])
 @app_views.route('/user/<id>', strict_slashes=False, methods=['GET'])

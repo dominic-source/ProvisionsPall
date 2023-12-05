@@ -24,6 +24,7 @@ To create a store
 To update a store
     curl -s -X PUT 127.0.0.2:5001/api/v1/user/user_id/store -H 'Content-type: application/x-www-form-urlencoded' -d 'name=dddTTThangenameofstore&description=This_is_provisonspasll_business&number=54&street=srag&area=itapa&city=ekiti&country=Nigeria&longitude=12.043&latitude=2.9054&store_id=4&store_address_id=4'
     # store_id and store_address_id are mandatory query parameters
+
 To get all stores associated with a user:
     curl -s -X GET 127.0.0.2:5001/api/v1/user/user_id/stores
 
@@ -32,3 +33,15 @@ To get all stores
 
 To get the location(s) of a store
     curl -s -X GET 127.0.0.2:5001/api/v1/locate/store_id
+
+To create a product
+    curl -s -X POST 127.0.0.2:5001/api/v1/3/product -d 'name=beans&price=1100&description&a_nice_price_for_beans&category=food_item'
+
+To Update a product
+    curl -s -X PUT 127.0.0.2:5001/api/v1/product/2 -d 'name=rice&price=1100&description&a_nice_price_for_beans&category=food_item'
+
+To Get a product
+    curl -s -X GET 127.0.0.2:5001/api/v1/product/2
+
+To Delete a product
+    curl -s -X DELETE 127.0.0.2:5001/api/v1/product/2
