@@ -2,13 +2,14 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
-  width: 320px;
+  width: 280px;
+  height: 320px;
   margin: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card img {
-  width: 300px;
+  width: 280px;
   height: 50px;
   object-fit: cover;
 }
@@ -28,11 +29,17 @@
 
 #searchBar {
   padding: 10px;
+  flex: 1;
   width: 70%;
   margin: 4px auto;
   text-align: left;
   display: inline-block;
   position: center;
+}
+
+.login-link {
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 #search_text {
@@ -63,4 +70,14 @@
   height: auto; /* Maintain the aspect ratio of the images */
   border: 1px solid #ddd; /* Optional: Add a border around each image */
   border-radius: 4px; /* Optional: Add rounded corners to each image */
+}
+
+.footer {
+  background-color: #2ecc71; 
+  color: white;
+  padding: 5px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
