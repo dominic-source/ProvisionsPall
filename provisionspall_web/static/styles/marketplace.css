@@ -8,10 +8,20 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }*/
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+  background-image: linear-gradient(rgba(0,0,0,7),rgba(0,0,0,7)), url(../static/images/img21.jpg);
+  background-size: cover;
+}
+
+
 .card img {
   width: 280px;
   height: 50px;
   object-fit: cover;
+  
 }
 
 .card-content {
@@ -21,10 +31,11 @@
 .card-title {
   font-size: 1.5em;
   margin-bottom: 10px;
+  color: #50C878;
 }
 
 .card-description {
-  color: #555;
+  color: #50C878
 }
 
 #searchBar {
@@ -75,9 +86,10 @@
 .footer {
   background-color: #2ecc71; 
   color: white;
-  padding: 5px;
+  padding: 2px;
   text-align: center;
   position: fixed;
   bottom: 0;
+  height: 40px;
   width: 100%;
 }
