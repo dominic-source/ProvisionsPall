@@ -1,20 +1,21 @@
-.card {
+/* .card { 
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
-  width: 50px;
+  width: 280px;
+  height: 320px;
   margin: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+}*/
 
 .card img {
-  width: 30%;
+  width: 280px;
   height: 50px;
   object-fit: cover;
 }
 
 .card-content {
-  padding: 15px;
+  padding: 10px;
 }
 
 .card-title {
@@ -28,10 +29,17 @@
 
 #searchBar {
   padding: 10px;
-  width: 500%;
+  flex: 1;
+  width: 70%;
   margin: 4px auto;
-  text-align: center;
+  text-align: left;
   display: inline-block;
+  position: center;
+}
+
+.login-link {
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 #search_text {
@@ -48,4 +56,28 @@
   float: left;
   box-sizing: border-box;
   transition: all 0.15s;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the minimum and maximum width of each column */
+  gap: 10px; /* Adjusts the gap between images */
+}
+
+/* Style for each image in the grid */
+.image-grid img {
+  width: 80%; /* Make sure each image takes up 100% of its container */
+  height: auto; /* Maintain the aspect ratio of the images */
+  border: 1px solid #ddd; /* Optional: Add a border around each image */
+  border-radius: 4px; /* Optional: Add rounded corners to each image */
+}
+
+.footer {
+  background-color: #2ecc71; 
+  color: white;
+  padding: 5px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
