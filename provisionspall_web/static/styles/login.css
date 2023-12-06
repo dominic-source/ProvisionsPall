@@ -24,6 +24,8 @@ body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             text-align: center;
+            background-image: linear-gradient(rgba(0,0,0,7),rgba(0,0,0,7)), url(../static/images/img21.jpg);
+            background-size: cover;
         }
 
         .login-container {

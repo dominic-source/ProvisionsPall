@@ -14,23 +14,19 @@
         <h2>Register</h2>
         <form id="registrationForm" action="/register" method="post" onsubmit="validationForm(event)" class="container">
             <div>
-                <label for="username">Username:</label>
-            <input type="text" id="username" name="username" pattern="[A-Za-z]+" title="Please enter only letters" required>
+            <input type="text" id="username" name="username" placeholder="username" pattern="[A-Za-z]+" title="Please enter only letters" required>
                 </div>
 
                 <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required> 
+            <input type="email" id="email" placeholder="email" name="email" required> 
                 </div>
 
                 <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" pattern="[A-Za-z0-9]+" title="Please enter only letters and numbers" required> 
+            <input type="password" id="password" name="password" placeholder="password" pattern="[A-Za-z0-9]+" title="Please enter only letters and numbers" required> 
                     </div>
 
                 <div>
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" pattern="[A-Za-z0-9]+" title="Please enter only letters and numbers" required>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="confirm password" pattern="[A-Za-z0-9]+" title="Please enter only letters and numbers" required>
                     </div>
 
 
