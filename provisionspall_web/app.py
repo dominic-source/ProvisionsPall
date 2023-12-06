@@ -31,7 +31,7 @@ def store():
 def market():
     """To help us render the market page"""
 
-    return render_template('market.html')
+    return render_template('marketplace.html')
 
 @app.route('/login', strict_slashes=False, methods=["GET", "POST"])
 def login():
