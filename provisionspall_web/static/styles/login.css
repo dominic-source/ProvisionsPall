@@ -68,3 +68,14 @@ body {
             height: 50px;
             font-size: medium;
         }
+
+        .footer {
+            background-color: #2ecc71; 
+            color: white;
+            padding: 2px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            height: 40px;
+            width: 100%;
+          }
