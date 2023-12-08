@@ -28,11 +28,19 @@
 
     .user_container button,
     #store,
+    .login-link,
+    .submit_button,
+    #close,
+    #close2,
     #submit_store {
-        min-height: 30px;
+        max-height: 30px;
+        min-height: 20px;
         min-width: 30px;
-        font-size: 12px;
+        font-size: 15px;
+        font-weight: 20px;
+
     }
+     
 
     .user_image_normal {
 

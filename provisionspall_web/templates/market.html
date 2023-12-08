@@ -10,6 +10,7 @@
             href="{{ url_for('static', filename='styles/dashboard.css') }}">
         <link rel="stylesheet" type="text/css"
             href="{{ url_for('static', filename='styles/marketplace.css') }}">
+
         <script src="{{ url_for('static', filename='scripts/market.js') }}"
             defer></script>
         <!-- Here is Jquery script element -->
@@ -41,7 +42,7 @@
             </aside>
         </section>
 
-        <div class="image-grid">
+        <div class="image-grid" data-cache="{{ cache_id }}">
             {% for product in products %}
             <div class="card" data-id="{{ product.id }}">
                 <img src="{{ url_for('static', filename='images/img14.jpg') }}"

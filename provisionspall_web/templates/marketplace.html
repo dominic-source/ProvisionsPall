@@ -11,7 +11,12 @@
       href="../static/styles/dashboard.css?{{ cache_id }}">
     <link rel="stylesheet" type="text/css"
       href="../static/styles/marketplace.css?{{ cache_id }}">
-    <script src="../static/scripts/market.js?{{ cache_id }}" defer></script>
+
+    <script src="{{ url_for('static', filename='scripts/market.js') }}" defer></script>
+
+    <!-- Here is Jquery script element -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
   </head>
 
   <body>
@@ -21,13 +26,15 @@
         placeholder="Search...." value>
       <a href="/login" class="login-link style_button style_input">Login</a>
       <a href="/register" class="login-link style_button style_input">Register</a>
-      <a href="/dashboard" class="login-link style_button style_input">My Dashboard</a>
+      <a href="/dashboard" class="login-link style_button style_input">My
+        Dashboard</a>
     </section>
 
-    <div class="image-grid">
+    <div class="image-grid" data-cache="{{ cache_id }}">
       {% for store in stores %}
-      <a href='/market/store/{{ store.id }}?{{ cache_id }}' class="card" data-id="{{ store.id }}">
-        <img src="../static/images/img14.jpg?{{ cache_id }}" alt="Store Image">
+      <a href='/market/store/{{ store.id }}?{{ cache_id }}' class="card"
+        data-id="{{ store.id }}">
+        <img src="{{ url_for('static', filename='images/img14.jpg') }}" alt="Store Image">
         <div class="card-content">
           <h2 class="card-title">{{ store.name }}</h2>
           <p class="card-description">{{ store.description }}</p>
