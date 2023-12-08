@@ -4,7 +4,9 @@
 
     /* Dashboard section */
     .dashboard {
-        top: 150px;
+        top: 230px;
+        margin: 10px 20px 10px 10px;
+
     }
 
     .store_input {

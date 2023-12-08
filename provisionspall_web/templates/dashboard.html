@@ -21,16 +21,25 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         <!-- CSS and JS script element for the dashboard-->
-        <link href="../static/styles/dashboard-mobile.css?{{ cache_id }}" rel="stylesheet">
-        <link href="../static/styles/dashboard.css?{{ cache_id }}" rel="stylesheet">
+        <link href="../static/styles/dashboard-mobile.css?{{ cache_id }}"
+            rel="stylesheet">
+        <link href="../static/styles/dashboard.css?{{ cache_id }}"
+            rel="stylesheet">
 
         <script src="../static/scripts/dashboard.js?{{ cache_id }}" defer></script>
         <script src="../static/scripts/geolocate.js?{{ cache_id }}" defer></script>
     </head>
     <body>
+
         <section role="navigation" style="max-height: 30%;">
+            <header class="page_header">
+                <a href="/market" class="login-link2">ProvisionsPall</a>
+                <a href="/market" class="login-link style_button style_input">Market
+                    Place</a>
+            </header>
             <nav class="user_container">
-                <img src="../static/images/CaadatechMachieFLyer.jpg?{{ cache_id }}"
+                <img
+                    src="../static/images/CaadatechMachieFLyer.jpg?{{ cache_id }}"
                     alt="Here is the user's picture"
                     class="user_image_normal">
                 <nav role="navigation">

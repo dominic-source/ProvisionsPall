@@ -8,6 +8,7 @@
     --accent-color: #2ecc71;
     /* Emerald */
 }
+
 button {
     cursor: pointer;
 }
@@ -19,9 +20,10 @@ button {
 /* Dashboard section */
 .dashboard {
     position: absolute;
-    top: 30%;
+    top: 150px;
+    left: 7.5%;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 20px 10px 10px;
     width: 80%;
 }
 
@@ -32,6 +34,8 @@ button {
     flex-direction: column;
     justify-content: center;
     width: 300px;
+    height: 90%;
+    margin-bottom: 30px;
 }
 
 .dashboard_action h4,
@@ -72,6 +76,13 @@ button {
     width: 90%;
 }
 
+.page_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
 .style_input {
     margin-bottom: 10px;
     margin-left: 10px;
@@ -83,7 +94,9 @@ button {
 }
 
 .style_input:focus,
-.style_input:hover, #searchBar:hover, #searchBar:focus{
+.style_input:hover,
+#searchBar:hover,
+#searchBar:focus {
     outline-color: var(--accent-color);
     border-color: var(--accent-color);
 }
@@ -121,7 +134,7 @@ aside#blur {
 }
 
 hr {
-    width: 150px;
+    max-width: 300px;
     border: 1px var(--accent-color) solid;
 }
 
@@ -133,6 +146,24 @@ hr {
 #longitude[readonly] {
     cursor: not-allowed;
     opacity: 0.7;
+}
+
+.login-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.login-link2 {
+    text-decoration: none;
+    font-size: 25px;
+    color: var(--primary-color);
+    padding: 5px;
+}
+
+.login-link2:hover,
+.login-link2:focus {
+    color: var(--secondary-color);
+    font-size: 20px;
 }
 
 .opacity {
@@ -175,21 +206,30 @@ hr {
 }
 
 .user_container button,
+.login-link,
 .submit_button,
 #close,
 #close2,
 #submit_store,
 #store {
-    font-size: 9px;
+    font-size: 15px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 20px;
-    min-height: 20px;
+    max-height: 30px;
 }
 
+.user_container button:focus,
+#close:focus,
+#store:focus,
+#close2:focus,
+.login-link:focus,
+#submit_store:focus,
+.submit_button:focus,
 .user_container button:hover,
 #close:hover,
 #store:hover,
 #close2:hover,
+.login-link:hover,
 #submit_store:hover,
 .submit_button:hover {
     color: white;
@@ -239,7 +279,7 @@ hr {
 
     /* Dashboard section */
     .dashboard {
-        top: 150px;
+        top: 200px;
     }
 
     .store_input {
@@ -256,7 +296,8 @@ hr {
     }
 
     .user_container button,
-    #store, #submit_store {
+    #store,
+    #submit_store {
         min-height: 30px;
         min-width: 30px;
         font-size: 12px;

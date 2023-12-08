@@ -86,9 +86,6 @@ $(function () {
         $(`.dashboard_action  #${uniqueId}`).append("<hr />");
 
       }
-      $(".dashboard_action").append(
-        '<a href="#submit" class="end">bottom</a><a href="#up" class="top">top</a>'
-      );
       $(`.dashboard_action .open`).on("click", function (event) {
         if ($(this).html() === "edit") {
           $(this).html("close");
@@ -149,7 +146,7 @@ $(function () {
           $(".view_products section").empty();
 
           // List all the products
-          $(".view_products section").append("<h4 id='top'> View all products</h4>");
+          $(".view_products section").append("<h4> View all products</h4>");
 
           for (let info of response) {
             let uniqueId = generateUUID();
@@ -172,9 +169,6 @@ $(function () {
             );
             $(`.view_products #${uniqueId}`).append("<hr />");
           }
-          $(".view_products section").append(
-            '<a href="#submit2" class="end">bottom</a><a href="#top" class="top">top</a>'
-          );
 
           $(".view_products .open").on("click", function () {
             if ($(this).html() === "edit") {
@@ -225,7 +219,7 @@ $(function () {
     $(".dashboard_action").addClass("invisible");
     $(".create_products").toggleClass("invisible");
 
-    // Send a request to get all stores stores information
+    // Send a request to get all stores information
     sendRequest(url + "/user/" + id + "/stores").done(function (info) {
       for (let data of info) {
         $('#mySelect').append(`<option value="${data.id}">${data.name}</option>`)
@@ -241,11 +235,13 @@ $(function () {
         'category': $('#category').val(),
         'store_id': select_id,
       }
-      sendRequest(url + "/" + select_id + "/product", method = 'POST', data = JSON.stringify(option_product)).done(function (info) {
-        // Remove all forms
-        $(".create_products").empty();
-        $(".create_products").toggleClass("invisible");
-      });
+      sendRequest(url + "/" + select_id + "/product", method = 'POST', data = JSON.stringify(option_product))
+        .done(function (info) {
+          // Remove all forms
+          $('.create_products input').each((function () {
+            $(this).val("");
+          }));
+        });
     });
   });
 });
