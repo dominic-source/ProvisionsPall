@@ -2,12 +2,12 @@
 """This module manages all the products of provisionspall"""
 
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import jsonify, request, make_response
 from models.model import User, Store, Store_Address
 from api.v1 import db
 
 
-@app_views.route('/user/store/<store_id>', strict_slashes=False, methods=['DELETE'])
+@app_views.route('/user/store/<store_id>', strict_slashes=False, methods=['DELETE', 'OPTIONS'])
 def delete_store(store_id):
     """Delete a store using the store id"""
     
@@ -16,18 +16,29 @@ def delete_store(store_id):
             store_del = db.session.get(Store, store_id)
             db.session.delete(store_del)
             db.session.commit()
-            return jsonify({'Message': 'successfully deleted the store'})
+            return jsonify({'Message': 'successfully deleted the store'}), 200
         except Exception as e:
             print(e)
             db.session.rollback()
-            return jsonify({'Error': 'Could not delete the store'})
+            return jsonify({'Error': 'Could not delete the store'}), 400
+    elif request.method == 'OPTIONS':
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5000")
+        response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+        response.headers.add("Access-Control-Allow-Methods", "DELETE")
+        return response
 
 
-@app_views.route('/user/<user_id>/stores', strict_slashes=False, methods=['GET', 'POST', 'PUT'])
+@app_views.route('/user/<user_id>/stores', strict_slashes=False, methods=['GET', 'POST', 'PUT', 'OPTIONS'])
 def get_stores(user_id):
     """Get all the stores as requested"""
-    
-    if request.method == 'GET':
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5000")
+        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+        response.headers.add("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS")
+        return response
+    elif request.method == 'GET':
         # Get all store of a User
         try:
             user_stores = db.session.query(User).filter(User.id == user_id).one().stores
@@ -41,27 +52,28 @@ def get_stores(user_id):
                     'user_id': store.user_id
                 }
                 all_stores.append(store_details)
-            return jsonify(all_stores)
+            return jsonify(all_stores), 200
 
         except Exception: 
             db.session.rollback()
-            return jsonify({'Error': 'Could not get store data at this time'})
+            return jsonify({'Error': 'Could not get store data at this time'}), 400
     elif request.method == 'POST' or request.method == 'PUT':
         try:
+            json_data = request.get_json()
             options = {
-                'name': request.form.get('name'),
-                'description': request.form.get('description'),
+                'name': json_data['name'],
+                'description': json_data['description'],
             }
-            address_options = { 
-                                'number': request.form.get('number'),
-                                'street':request.form.get('street'),
-                                'area': request.form.get('area'),
-                                'city': request.form.get('city'),
-                                'country': request.form.get('country'),
-                                'longitude': request.form.get('longitude'),
-                                'latitude': request.form.get('latitude')
-                                }
             if request.method == 'POST':
+                address_options = { 
+                                'number': json_data['number'],
+                                'street':json_data['street'],
+                                'area': json_data['area'],
+                                'city': json_data['city'],
+                                'country': json_data['country'],
+                                'longitude': json_data['longitude'],
+                                'latitude': json_data['latitude']
+                                }
                 address = Store_Address(**address_options)
                 store = Store(**options)
                 store.user_id = user_id
@@ -69,27 +81,28 @@ def get_stores(user_id):
                 store.addresses = [address]
                 db.session.add(store)
                 db.session.commit()
-                return jsonify({'message': 'Store created successfully', 'store_id': store.id, 'store_address_id': address.id})
-            else:
-                store_id = request.form.get('store_id')
-                store_address_id = request.form.get('store_address_id')
+                return jsonify({'message': 'Store created successfully', 'store_id': store.id, 'store_address_id': address.id}), 200
+            elif request.method == 'PUT':
+                store_id = json_data['store_id']
+                # store_address_id = request.form.get('store_address_id')
                 update_store = db.session.get(Store, store_id)
-                update_store_address = db.session.get(Store_Address, store_address_id)
-                if update_store and update_store_address:
+                # update_store_address = db.session.get(Store_Address, store_address_id)
+                if update_store:
                     for key, value in options.items():
                         if value:
                             setattr(update_store, key, value)
-                    for key, value in address_options.items():
-                        if value:
-                            setattr(update_store_address, key, value)
+                    # for key, value in address_options.items():
+                    #     if value:
+                    #         setattr(update_store_address, key, value)
                     db.session.commit()
-                    return jsonify({'Message': 'Updated successfully', 'store_id': store_id})
+                    return jsonify({'Message': 'Updated successfully', 'store_id': store_id}), 200
                 else:
-                    return jsonify({'Message': 'Not found'})
+                    return jsonify({'Message': 'Not found'}), 404
                 
-        except Exception:
+        except Exception as e:
+            print(e)
             db.session.rollback()
-            return jsonify({'Error': 'Error create Store'})
+            return jsonify({'Error': 'Error create Store'}), 400
 
       
 @app_views.route('/stores', strict_slashes=False, methods=['GET'])
@@ -108,9 +121,9 @@ def all_stores():
                     'user_id': store.user_id
                 }
                 all_stores.append(store_details)
-            return jsonify(all_stores)
+            return jsonify(all_stores), 200
 
         except Exception: 
             db.session.rollback()
-            return jsonify({'Error': 'Could not get all store data at this time'})
+            return jsonify({'Error': 'Could not get all store data at this time'}), 404
  

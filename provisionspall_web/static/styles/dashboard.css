@@ -6,6 +6,13 @@
     .dashboard {
         top: 150px;
     }
+
+    .store_input {
+        width: 350px !important;
+        height: 30px;
+        font-size: 15px;
+    }
+
     .user {
         left: 200px;
         margin: 50px;
@@ -16,16 +23,19 @@
     .user_container {
         height: 150px;
     }
-    .user_container button {
+
+    .user_container button,
+    #store,
+    #submit_store {
         min-height: 30px;
         min-width: 30px;
         font-size: 12px;
     }
 
     .user_image_normal {
-    
+
         height: 75px;
         width: 75px;
     }
- 
+
 }

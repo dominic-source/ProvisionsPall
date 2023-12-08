@@ -8,13 +8,12 @@
     --accent-color: #2ecc71;
     /* Emerald */
 }
-
-.body-overflow {
-    overflow: hidden;
-}
-
 button {
     cursor: pointer;
+}
+
+.create_store {
+    padding-top: 10px;
 }
 
 /* Dashboard section */
@@ -73,11 +72,10 @@ button {
     width: 90%;
 }
 
-
 .style_input {
     margin-bottom: 10px;
     margin-left: 10px;
-    max-width: 200px;
+    max-width: 400px;
     max-height: 150px;
     border-radius: 3.5px;
     border: 1px var(--accent-color) solid;
@@ -85,7 +83,7 @@ button {
 }
 
 .style_input:focus,
-.style_input:hover {
+.style_input:hover, #searchBar:hover, #searchBar:focus{
     outline-color: var(--accent-color);
     border-color: var(--accent-color);
 }
@@ -114,7 +112,8 @@ aside#blur {
     z-index: 3;
 }
 
-#close {
+#close,
+#close2 {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -128,6 +127,12 @@ hr {
 
 .invisible {
     display: none;
+}
+
+#latitude[readonly],
+#longitude[readonly] {
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .opacity {
@@ -147,14 +152,15 @@ hr {
     margin: 15px;
     display: flex;
     align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-direction: column;
     width: 250px;
     height: 500px;
-    border: 1px var(--secondary-color) solid;
-    border-radius: 20px;
+    border: 1px #ccc solid;
+    border-radius: 10px;
     padding: 15px;
-    background-color: var(--primary-color);
-    color: white;
+    background-color: #fff;
+    /* color: white; */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     z-index: 3;
 }
@@ -170,7 +176,10 @@ hr {
 
 .user_container button,
 .submit_button,
-#close {
+#close,
+#close2,
+#submit_store,
+#store {
     font-size: 9px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 20px;
@@ -179,6 +188,9 @@ hr {
 
 .user_container button:hover,
 #close:hover,
+#store:hover,
+#close2:hover,
+#submit_store:hover,
 .submit_button:hover {
     color: white;
     background-color: var(--accent-color);
@@ -230,6 +242,12 @@ hr {
         top: 150px;
     }
 
+    .store_input {
+        width: 250px !important;
+        height: 25px;
+        font-size: 12px;
+    }
+
     .user {
         left: 150px;
         margin: 25px;
@@ -237,7 +255,8 @@ hr {
         height: 350px;
     }
 
-    .user_container button {
+    .user_container button,
+    #store, #submit_store {
         min-height: 30px;
         min-width: 30px;
         font-size: 12px;

@@ -80,13 +80,27 @@ function initMap() {
     //Create the map
     const map = new google.maps.Map(document.getElementById('map'),
         {
-            center: { lat: 52.632469, lng: -1.689423 },
-            zoom: 16,
+            center: { lat: 9.0820, lng: 8.6753 },
+            zoom: 8,
             styles: mapStyle
         });
     // Load the stores json onto the map
-    map.data.loadGeoJson('/static/scripts/stores.json', { idPropertyName: 'storeid' });
+    get_id = document.getElementById('map').dataset.ids;
+    let url = "http://127.0.0.2:5001/api/v1/locate/" + get_id;
+    fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(geoData => {
+            map.data.addGeoJson(geoData.geoJsonFormat, { idPropertyName: 'storeid' });
 
+        })
+        .catch(error => {
+            console.log(error);
+        });
     // Define the custom marker icons using the store's "category"
     map.data.setStyle((feature) => {
         return {
@@ -96,7 +110,7 @@ function initMap() {
             }
         }
     });
-    const apiKey = 'AIzaSyAlzfoA_Mmaf30s3EO0Zrnz28fK248nTOY';
+    const apiKey = 'AIzaSyCtRXnkNE4h6eeqCg0IoTyMXqyHrfbOYLI';
     const infoWindow = new google.maps.InfoWindow();
 
     // Show the information for a store when its marker is clicked

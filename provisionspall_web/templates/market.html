@@ -1,40 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <title>ProvisionsPall</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Store</title>
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='styles/dashboard-mobile.css') }}">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='styles/dashboard.css') }}">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='styles/marketplace.css') }}">
+        <script src="{{ url_for('static', filename='scripts/market.js') }}"
+            defer></script>
+        <!-- Here is Jquery script element -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="../static/scripts/googleapi.js" defer></script>
-        
-        <!-- Leaflet CSS -->
-         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-         crossorigin=""/>
-        
-         <!-- Leaflet JavaScript -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
 
-        <!-- OpenRouteService plugin -->
-        <script src="https://unpkg.com/leaflet-routing-machine@5.3.14/dist/leaflet-routing-machine.js"></script>
     </head>
     <body>
-        <header>
-            <h1>I am at the top but God is everything.</h1>
-        </header>
-        <section>
-            <p>We are doing the best we can, may God help us</p>
+        <section class="container">
+            <input type="text" id="searchBar" name="search_text"
+                class="search_text"
+                placeholder="Search...." value>
+            <a href="/store/{{ products[0].store_id }}"
+                class="login-link style_button style_input">Locate
+                me</a>
+            <button id="address" class="login-link style_button style_input"
+                data-store="{{ products[0].store_id }}">Show
+                address</button>
         </section>
-        <footer>
-            <div id="map"
-                style='height: 500px; width: 500px;'
-                data-id="1224" 
-                data-name="chinonso" 
-                data-location="current">
+
+        <div class="image-grid">
+            {% for product in products %}
+            <div class="card" data-id="{{ product.id }}">
+                <img src="{{ url_for('static', filename='images/img14.jpg') }}"
+                    alt="Store Image">
+                <div class="card-content">
+                    <h2 class="card-title">{{ product.name }}</h2>
+                    <p class="card-description">{{ product.category }}</p>
+                    <p class="card-title">$ {{ product.price }}</p>
+                </div>
             </div>
-            <h3>It is nice down here</h3>
-        </footer>
-       
+            {% endfor %}
+        </div>
+        <div class="footer">
+            <p>&copy; 2023 ProvisionsPall. All Rights Reserved.</p>
+        </div>
     </body>
 </html>

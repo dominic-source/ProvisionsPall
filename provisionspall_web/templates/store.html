@@ -16,17 +16,17 @@
 
         <title>ProvisionsPall</title>
 
-        <link rel="stylesheet" href="../static/styles/store.css" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/store.css') }}" />
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     </head>
-    <body>
-        <div id="map"></div>
+    <body >
+        <div id="map" data-ids="{{ store_id }}"></div>
 
-        <script src="../static/scripts/store.js" defer></script>
+        <script src="{{ url_for('static', filename='scripts/store.js') }}" defer></script>
 
         <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlzfoA_Mmaf30s3EO0Zrnz28fK248nTOY&libraries=places&callback=initMap"></script>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtRXnkNE4h6eeqCg0IoTyMXqyHrfbOYLI&libraries=places&callback=initMap"></script>
 
         <footer></footer>
 
