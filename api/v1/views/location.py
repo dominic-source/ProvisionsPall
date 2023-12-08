@@ -23,6 +23,7 @@ def locate_me(store_id):
                             "features": []}
                 for addr in data.addresses:
                     address_data = { 
+                                        'store_name': data.name,
                                         'number': addr.number,
                                         'street':addr.street,
                                         'area': addr.area,

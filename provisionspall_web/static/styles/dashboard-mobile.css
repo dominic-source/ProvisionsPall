@@ -118,6 +118,7 @@ aside#blur {
     background-color: var(--accent-color);
     position: absolute;
     top: 0px;
+    left: 0px;
     height: 1000px;
     width: 100%;
     filter: blur(10px);

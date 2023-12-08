@@ -77,14 +77,6 @@ const mapStyle = [{
 
 
 function initMap() {
-    //Create the map
-    const map = new google.maps.Map(document.getElementById('map'),
-        {
-            center: { lat: 9.0820, lng: 8.6753 },
-            zoom: 8,
-            styles: mapStyle
-        });
-    // Load the stores json onto the map
     get_id = document.getElementById('map').dataset.ids;
     let url = "http://127.0.0.2:5001/api/v1/locate/" + get_id;
     fetch(url)
@@ -95,108 +87,120 @@ function initMap() {
             return response.json();
         })
         .then(geoData => {
+            //Create the map
+            let longitude = geoData.geoJsonFormat.features[0].geometry.coordinates[0];
+            let latitude = geoData.geoJsonFormat.features[0].geometry.coordinates[1];
+            const map = new google.maps.Map(document.getElementById('map'),
+                {
+                    center: { lat: latitude, lng: longitude },
+                    zoom: 13,
+                    styles: mapStyle
+                });
+
             map.data.addGeoJson(geoData.geoJsonFormat, { idPropertyName: 'storeid' });
 
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    // Define the custom marker icons using the store's "category"
-    map.data.setStyle((feature) => {
-        return {
-            icon: {
-                url: `/static/images/icon_${feature.getProperty('category')}.png`,
-                scaledSize: new google.maps.Size(64, 64),
-            }
-        }
-    });
-    const apiKey = 'AIzaSyCtRXnkNE4h6eeqCg0IoTyMXqyHrfbOYLI';
-    const infoWindow = new google.maps.InfoWindow();
+            // Define the custom marker icons using the store's "category"
+            map.data.setStyle((feature) => {
+                return {
+                    icon: {
+                        url: `/static/images/icon_${feature.getProperty('category')}.png`,
+                        scaledSize: new google.maps.Size(64, 64),
+                    }
+                }
+            });
+            const apiKey = 'AIzaSyCtRXnkNE4h6eeqCg0IoTyMXqyHrfbOYLI';
+            const infoWindow = new google.maps.InfoWindow();
 
-    // Show the information for a store when its marker is clicked
-    map.data.addListener('click', (event) => {
-        const category = event.feature.getProperty('category');
-        const name = event.feature.getProperty('name');
-        const description = event.feature.getProperty('description');
-        const hours = event.feature.getProperty('hours');
-        const phone = event.feature.getProperty('phone');
-        const position = event.feature.getGeometry().get();
-        const content = `<img style="float:left; width:200px; margin-top:30px" src="img/logo_${category}.png">
+            // Show the information for a store when its marker is clicked
+            map.data.addListener('click', (event) => {
+                const category = event.feature.getProperty('category');
+                const name = event.feature.getProperty('name');
+                const description = event.feature.getProperty('description');
+                const hours = event.feature.getProperty('hours');
+                const phone = event.feature.getProperty('phone');
+                const position = event.feature.getGeometry().get();
+                const content = `<img style="float:left; width:200px; margin-top:30px" src="img/logo_${category}.png">
         <div style="margin-left:220px; margin-bottom:20px;">
           <h2>${name}</h2><p>${description}</p>
           <p><b>Open:</b> ${hours}<br/><b>Phone:</b> ${phone}</p>
           <p><img src="https://maps.googleapis.com/maps/api/streetview?size=350x120&location=${position.lat()},${position.lng()}&key=${apiKey}&solution_channel=GMP_codelabs_simplestorelocator_v1_a"></p>
         </div>
         `;
-        infoWindow.setContent(content);
-        infoWindow.setPosition(position);
-        infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -30) });
-        infoWindow.open(map);
-    });
+                infoWindow.setContent(content);
+                infoWindow.setPosition(position);
+                infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -30) });
+                infoWindow.open(map);
+            });
 
-    // Build and add the search bar
-    const card = document.createElement('div');
-    const titleBar = document.createElement('div');
-    const title = document.createElement('div');
-    const container = document.createElement('div');
-    const input = document.createElement('input');
-    const options = {
-        types: ['address'],
-        componentRestrictions: { country: 'gb' },
-    };
-    card.setAttribute('id', 'pac-card');
-    title.setAttribute('id', 'title');
-    title.setContent = 'Find the nearest store';
-    titleBar.appendChild(title);
-    container.setAttribute('id', 'pac-container');
-    input.setAttribute('id', 'pac-input');
-    input.setAttribute('type', 'text');
-    input.setAttribute('placeholder', 'Enter an address');
-    container.appendChild(input);
-    card.appendChild(titleBar);
-    card.appendChild(container);
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+            // Build and add the search bar
+            const card = document.createElement('div');
+            const titleBar = document.createElement('div');
+            const title = document.createElement('div');
+            const container = document.createElement('div');
+            const input = document.createElement('input');
+            const options = {
+                types: ['address'],
+                componentRestrictions: { country: 'gb' },
+            };
+            card.setAttribute('id', 'pac-card');
+            title.setAttribute('id', 'title');
+            title.setContent = 'Find the nearest store';
+            titleBar.appendChild(title);
+            container.setAttribute('id', 'pac-container');
+            input.setAttribute('id', 'pac-input');
+            input.setAttribute('type', 'text');
+            input.setAttribute('placeholder', 'Enter an address');
+            container.appendChild(input);
+            card.appendChild(titleBar);
+            card.appendChild(container);
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
-    // Make the search bar into a Places Autocomplete search bar and select
-    // which detail fields should be returned about the place that
-    // the user selects from the suggestions.
-    const autocomplete = new google.maps.places.Autocomplete(input, options);
+            // Make the search bar into a Places Autocomplete search bar and select
+            // which detail fields should be returned about the place that
+            // the user selects from the suggestions.
+            const autocomplete = new google.maps.places.Autocomplete(input, options);
 
-    autocomplete.setFields(['address compents', 'geometry', 'name']);
+            autocomplete.setFields(['address compents', 'geometry', 'name']);
 
 
-    // Set the origin point when the user selects an address
-    const originMarker = new google.maps.Marker({ map: map });
-    originMarker.setVisible(false);
-    let originLocation = map.getCenter();
-    autocomplete.addListener('place_changed', async () => {
-        originMarker.setVisible(false);
-        originLocation = map.getCenter();
-        const place = autocomplete.getPlace();
+            // Set the origin point when the user selects an address
+            const originMarker = new google.maps.Marker({ map: map });
+            originMarker.setVisible(false);
+            let originLocation = map.getCenter();
+            autocomplete.addListener('place_changed', async () => {
+                originMarker.setVisible(false);
+                originLocation = map.getCenter();
+                const place = autocomplete.getPlace();
 
-        if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert('No address available for input: \'' + place.name + '\'');
-            return;
-        }
-        // Recenter the map to the selected address
-        originLocation = place.geometry.location();
-        map.setCenter(originLocation);
-        map.setZoom(9);
-        console.log(place);
+                if (!place.geometry) {
+                    // User entered the name of a Place that was not suggested and
+                    // pressed the Enter key, or the Place Details request failed.
+                    window.alert('No address available for input: \'' + place.name + '\'');
+                    return;
+                }
+                // Recenter the map to the selected address
+                originLocation = place.geometry.location();
+                map.setCenter(originLocation);
+                map.setZoom(9);
+                console.log(place);
 
-        originMarker.setPosition(originLocation);
-        originMarker.setVisible(true);
+                originMarker.setPosition(originLocation);
+                originMarker.setVisible(true);
 
-        // Use the selected address as the origin to calculate distances
-        // to each of the store locations
-        const rankedStores = await calculateDistances(map.data, originLocation);
-        showStoresList(map.data, rankedStores);
+                // Use the selected address as the origin to calculate distances
+                // to each of the store locations
+                const rankedStores = await calculateDistances(map.data, originLocation);
+                showStoresList(map.data, rankedStores);
 
-        return;
+                return;
 
-    });
+            });
+
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
 }
 
 async function calculateDistances(data, origin) {
