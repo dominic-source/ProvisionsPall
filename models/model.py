@@ -12,10 +12,11 @@ class User(db.Model):
     last_name = db.Column(db.String(20))
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    image = db.Column(db.String(150), nullable=True, default='chinonso')
     date_created = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
-    addresses = db.relationship('User_Address', backref='user', lazy=True)
-    stores = db.relationship('Store', backref='user', lazy=True)
+    addresses = db.relationship('User_Address', backref='user', lazy=True, cascade='all, delete-orphan')
+    stores = db.relationship('Store', backref='user', lazy=True, cascade='all, delete-orphan')
 
     def __repr__(self):
         """ Representation of the User model """
@@ -42,11 +43,12 @@ class Store(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String(150), nullable=True, default='img14')
     date_created = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    addresses = db.relationship('Store_Address', backref='store', lazy=True)
-    products = db.relationship('Product', backref='store', lazy=True)
+    addresses = db.relationship('Store_Address', backref='store', lazy=True, cascade='all, delete-orphan')
+    products = db.relationship('Product', backref='store', lazy=True, cascade='all, delete-orphan')
 
     def __repr__(self):
         """ Representation of the Store model """
@@ -75,6 +77,7 @@ class Product(db.Model):
     name = db.Column(db.String(100), unique=True, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String(150), nullable=True, default='img4')
     category = db.Column(db.String(80), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)

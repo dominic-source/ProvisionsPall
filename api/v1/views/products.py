@@ -2,21 +2,118 @@
 """This module manages all the products of provisionspall"""
 
 from api.v1.views import app_views
-from flask import make_response, jsonify
-import json
+from flask import jsonify, request
+from api.v1 import db
+from models.model import Product, Store
 
-@app_views.route('/products', strict_slashes=False, methods=['GET'])
-def products():
+@app_views.route('/<store_id>/product', strict_slashes=False, methods=['POST', 'GET'])
+def products(store_id=None):
     """Get all the products"""
     # get all the products
 
-    # Get random products
-    with open('api/data_for_testing/product.json', 'r', encoding='utf-8') as fd2:
-        products = json.load(fd2)
+    if request.method == 'POST':
+        json_data = request.get_json()
+        if store_id:
+            options = {
+                'name': json_data.get('name'),
+                'price': json_data.get('price'),
+                'description': json_data.get('description'),
+                'category': json_data.get('category'),
+                'store_id': store_id,
+                'image': json_data.get('image')
+            }
+        try:
+            product = Product(**options)
+            # Get the store
+            store = db.session.get(Store, store_id)
+            store.products.append(product)
+            db.session.commit()
+            return jsonify({'Message': 'Success creating product', 'product_id': product.id, 'status': 'success'}), 200
+        except Exception as e:
+            print(e)
+            db.session.rollback()
+            return jsonify({'Error': 'Error creating a product'}), 400
+    elif request.method == 'GET':
+        if store_id:
+            try:
+                store = db.session.get(Store, store_id)
+                products = store.products
+                all_products = []
+                for data in products:
+                    options = {
+                        'name': data.name,
+                        'price': data.price,
+                        'description': data.description,
+                        'category': data.category,
+                        'id': data.id,
+                        'image': data.image,
+                        'date_created': data.date_created,
+                        'store_id': data.store_id
+                    }
+                    all_products.append(options)
+                return jsonify(all_products), 200
+            except Exception as e:
+                print(e)
+                db.session.rollback()
+                return jsonify({'Error': 'An error was encountered'}), 400
+   
+@app_views.route('/product/<product_id>', strict_slashes=False, methods=['PUT', 'GET', 'DELETE'])
+def update_product(product_id=None):
+    """Update a product"""
+    
+    if request.method == 'PUT':
+        json_data = request.get_json()
+        if product_id:
+            options = {
+                'name': json_data.get('name'),
+                'price': json_data.get('price'),
+                'description': json_data.get('description'),
+                'category': json_data.get('category'),
+                'image': json_data.get('image')
+            }
+        try:
+            data = db.session.get(Product, product_id)
+            for key, value in options.items():
+                if value:
+                    setattr(data, key, value)
+            db.session.commit()
+            return jsonify({'Message': 'Product updated successfully', 'product_id': data.id}), 200
+        except Exception as e:
+            print(e)
+            db.session.rollback()
+            return jsonify({'Error': 'An error was encountered'}), 400
 
-    return jsonify(products[0:20])
+    elif request.method == 'GET':
+        if product_id:
+            try:
+                data = db.session.get(Product, product_id)
+                options = {
+                    'name': data.name,
+                    'price': data.price,
+                    'description': data.description,
+                    'category': data.category,
+                    'id': data.id,
+                    'date_created': data.date_created,
+                    'store_id': data.store_id
+                }
+                return jsonify(options), 200
+            except Exception as e:
+                print(e)
+                db.session.rollback()
+                return jsonify({'Error': 'An error was encountered'}), 400
+    elif request.method == 'DELETE':
+        if product_id:
+            try:
+                data = db.session.get(Product, product_id)
+                db.session.delete(data)
+                db.session.commit()
+                return jsonify({'Message': 'Succesfully deleted'}), 200
+            except Exception as e:
+                print(e)
+                db.session.rollback()
+                return jsonify({'Error': 'An error was encountered'}), 400
 
-
+    
 @app_views.route('/products_search', strict_slashes=False, methods=['POST'])
 def products_search():
     """Get all the products"""

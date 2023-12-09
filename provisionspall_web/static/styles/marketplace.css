@@ -51,8 +51,14 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 30px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+@media screen and (min-width: 500px) {
+  .container {
+    padding: 30px;
+  }
 }
 
 .login-link {
@@ -60,17 +66,12 @@
   color: inherit;
 }
 
-
-
 #searchBar {
   padding: 10px;
-  flex: 1;
   width: 50%;
   margin: 4px auto;
   text-align: left;
   border-radius: 3.5px;
-  display: inline-block;
-  position: center;
   border: 1px var(--accent-color) solid;
 }
 

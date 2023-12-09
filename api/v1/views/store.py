@@ -61,18 +61,18 @@ def get_stores(user_id):
         try:
             json_data = request.get_json()
             options = {
-                'name': json_data['name'],
-                'description': json_data['description'],
+                'name': json_data.get('name'),
+                'description': json_data.get('description'),
             }
             if request.method == 'POST':
                 address_options = { 
-                                'number': json_data['number'],
-                                'street':json_data['street'],
-                                'area': json_data['area'],
-                                'city': json_data['city'],
-                                'country': json_data['country'],
-                                'longitude': json_data['longitude'],
-                                'latitude': json_data['latitude']
+                                'number': json_data.get('number'),
+                                'street':json_data.get('street'),
+                                'area': json_data.get('area'),
+                                'city': json_data.get('city'),
+                                'country': json_data.get('country'),
+                                'longitude': json_data.get('longitude'),
+                                'latitude': json_data.get('latitude')
                                 }
                 address = Store_Address(**address_options)
                 store = Store(**options)

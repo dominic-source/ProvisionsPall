@@ -5,7 +5,6 @@ from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
 from provisionspall_web import app, db
 from models.model import User, Store, Product
-import datetime
 import uuid
 
 app.secret_key = 'fsafabzfgtgrtjo4389uj3opjpwroijninhgwi'
@@ -30,6 +29,7 @@ def dashboard():
                 'first_name': user.first_name,
                 'last_name': user.last_name,
                 'id': user.id,
+                'image': user.image,
                 'company_name': str(user.username) + '\'s ' + 'company limited'
             }
             
@@ -65,7 +65,8 @@ def dashboard():
 @app.route('/store/<id>', strict_slashes=False)
 def store(id):
     """To help us render the store page"""
-
+    if id is None:
+        return redirect('/market')
     return render_template('store.html', cache_id=uuid.uuid4(), store_id=id)
 
 @app.route('/market', strict_slashes=False)
@@ -77,7 +78,12 @@ def market():
 @app.route('/market/store/<id>', strict_slashes=False)
 def market_store(id=None):
     """To help us render the market page"""
+    
+    if id is None:
+        return redirect('/market')
     store = db.session.get(Store, id)
+    if not len(store.products):
+        return redirect('/market')
     return render_template('market.html', products=store.products, cache_id=uuid.uuid4())
 
 @app.route('/login', strict_slashes=False, methods=["GET", "POST"])

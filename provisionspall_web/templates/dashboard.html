@@ -39,24 +39,24 @@
             </header>
             <nav class="user_container">
                 <img
-                    src="../static/images/CaadatechMachieFLyer.jpg?{{ cache_id }}"
+                    src="../static/images/{{ userdata.image }}.jpg?{{ cache_id }}"
                     alt="Here is the user's picture"
                     class="user_image_normal">
                 <nav role="navigation">
-                    <button id="view" class="style_button"
+                    <button id="view" class="style_button style_input"
                         data-store_ids="{{ storedata }}"
                         data-user_id="{{ userdata.id }}">View user</button>
-                    <button id="edit" class="style_button">Edit store details</button>
-                    <button id="produce" class="style_button">View products
+                    <button id="edit" class="style_button style_input">Edit store details</button>
+                    <button id="produce" class="style_button style_input">View products
                     </button>
-                    <button id="create" class="style_button">Create products</button>
+                    <button id="create" class="style_button style_input">Create products</button>
                 </nav>
                 <hr />
             </nav>
             <aside id="aside" class="invisible">
                 <aside id="blur" class="opacity"></aside>
                 <div class="user">
-                    <img src="../static/images/chinonso.jpg?{{ cache_id }}"
+                    <img src="../static/images/{{ userdata.image }}.jpg?{{ cache_id }}"
                         alt="Here is the user's picture"
                         width="100px"
                         height="100px"

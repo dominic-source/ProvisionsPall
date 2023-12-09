@@ -24,17 +24,27 @@
     <section class="container">
       <input type="text" id="searchBar" name="search_text" class="search_text"
         placeholder="Search...." value>
-      <a href="/login" class="login-link style_button style_input">Login</a>
-      <a href="/register" class="login-link style_button style_input">Register</a>
-      <a href="/dashboard" class="login-link style_button style_input">My
+      <a href="/login" class="login-link style_button style_input bigDevice">Login</a>
+      <a href="/register" class="login-link style_button style_input bigDevice">Register</a>
+      <a href="/dashboard" class="login-link style_button style_input bigDevice">My
         Dashboard</a>
+      <!-- <aside class="addDevice"> -->
+        <aside class="device">
+          <h1 class="smallDevice">+</h1>
+          <a href="/dashboard" class="asideItem invisible">My Dashboard</a>
+          <a href="/login" class="asideItem invisible">Login</a>
+          <a href="/register" class="asideItem invisible">Register</a>
+        </aside>
+      <!-- </aside> -->
     </section>
 
     <div class="image-grid" data-cache="{{ cache_id }}">
       {% for store in stores %}
       <a href='/market/store/{{ store.id }}?{{ cache_id }}' class="card"
         data-id="{{ store.id }}">
-        <img src="{{ url_for('static', filename='images/img14.jpg') }}" alt="Store Image">
+        <img
+          src="{{ url_for('static', filename='images/' + store.image + '.jpg') }}"
+          alt="Store Image">
         <div class="card-content">
           <h2 class="card-title">{{ store.name }}</h2>
           <p class="card-description">{{ store.description }}</p>

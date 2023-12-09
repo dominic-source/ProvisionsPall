@@ -18,13 +18,77 @@ button {
 }
 
 /* Dashboard section */
+
+.asideDash {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: 70%;
+    background-color: rgba(59, 250, 139, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 200px;
+    max-height: 250px;
+    padding-left: 10px;
+    box-shadow: 0 4px 8px rgba(46, 204, 112, 0.1);
+    backdrop-filter: blur(3px);
+}
+
+.asideItem {
+    color: black;
+    text-decoration: none;
+}
+.asideItem:focus {
+    color: var(--primary-color);
+}
+.bigDevice {
+    display: none;
+}
+
 .dashboard {
     position: absolute;
-    top: 150px;
+    top: 160px;
     left: 7.5%;
     padding: 10px;
     margin: 10px 20px 10px 10px;
     width: 80%;
+}
+
+.smallDevice {
+    border-radius: 3.5px;
+    color: var(--accent-color);
+    font-weight: 900;
+    font-size: 50px;
+    text-align: center;
+    margin: 0px;
+}
+
+.rotate {
+    cursor: pointer;
+    transform: rotate(45deg);
+    color: black;
+    padding: 0px;
+}
+
+@media screen and (max-width: 372px) {
+    .dashboard {
+        top: 60%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .bigDevice {
+        display: inline-flex;
+    }
+
+    .smallDevice {
+        display: none;
+    }
 }
 
 .dashboard_action,
@@ -268,6 +332,7 @@ hr {
     border-radius: 50%;
     height: 50px;
     width: 50px;
+    margin: 10px;
 }
 
 .user_image_normal:hover {

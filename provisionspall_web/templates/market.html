@@ -23,15 +23,20 @@
                 class="search_text"
                 placeholder="Search...." value>
             <a href="/store/{{ products[0].store_id }}"
-                class="login-link style_button style_input">Locate
+                class="login-link style_button style_input bigDevice">Locate
                 me</a>
-            <button id="address" class="login-link style_button style_input"
+            <button id="address"
+                class="login-link style_button style_input bigDevice"
                 data-store="{{ products[0].store_id }}">Show
                 address</button>
-            <a href="/market" class="login-link style_button style_input">Market
+            <a href="/market"
+                class="login-link style_button style_input bigDevice">Market
                 Place</a>
-            <a href="/dashboard" class="login-link style_button style_input">My
+            <a href="/dashboard"
+                class="login-link style_button style_input bigDevice">My
                 Dashboard</a>
+            <h1
+                class="smallDevice">X</h1>
             <aside id="aside" class="invisible">
                 <aside id="blur" class="opacity"></aside>
                 <address aria-label="Here is the store address invisible"
@@ -45,7 +50,8 @@
         <div class="image-grid" data-cache="{{ cache_id }}">
             {% for product in products %}
             <div class="card" data-id="{{ product.id }}">
-                <img src="{{ url_for('static', filename='images/img14.jpg') }}"
+                <img
+                    src="{{ url_for('static', filename='images/' + product.image + '.jpg') }}"
                     alt="Store Image">
                 <div class="card-content">
                     <h2 class="card-title">{{ product.name }}</h2>
