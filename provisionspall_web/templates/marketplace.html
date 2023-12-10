@@ -43,7 +43,7 @@
       <a href='/market/store/{{ store.id }}?{{ cache_id }}' class="card"
         data-id="{{ store.id }}">
         <img
-          src="{{ url_for('static', filename='images/' + store.image + '.jpg') }}"
+          src="{{ url_for('static', filename='uploads/' + store.image) }}"
           alt="Store Image">
         <div class="card-content">
           <h2 class="card-title">{{ store.name }}</h2>

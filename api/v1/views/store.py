@@ -5,7 +5,9 @@ from api.v1.views import app_views
 from flask import jsonify, request, make_response
 from models.model import User, Store, Store_Address
 from api.v1 import db
-
+from provisionspall_web import UPLOAD_FOLDER, allowed_file
+import os
+from werkzeug.utils import secure_filename
 
 @app_views.route('/user/store/<store_id>', strict_slashes=False, methods=['DELETE', 'OPTIONS'])
 def delete_store(store_id):
@@ -59,20 +61,27 @@ def get_stores(user_id):
             return jsonify({'Error': 'Could not get store data at this time'}), 400
     elif request.method == 'POST' or request.method == 'PUT':
         try:
-            json_data = request.get_json()
+            # Handle file uploads
+            file = request.files.get('file')
+            filename = ''
+            if file and allowed_file(file.filename):                
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(UPLOAD_FOLDER, filename))
+
             options = {
-                'name': json_data.get('name'),
-                'description': json_data.get('description'),
+                'name': request.form.get('name'),
+                'description': request.form.get('description'),
+                'image': filename
             }
             if request.method == 'POST':
                 address_options = { 
-                                'number': json_data.get('number'),
-                                'street':json_data.get('street'),
-                                'area': json_data.get('area'),
-                                'city': json_data.get('city'),
-                                'country': json_data.get('country'),
-                                'longitude': json_data.get('longitude'),
-                                'latitude': json_data.get('latitude')
+                                'number': request.form.get('number'),
+                                'street':request.form.get('street'),
+                                'area': request.form.get('area'),
+                                'city': request.form.get('city'),
+                                'country': request.form.get('country'),
+                                'longitude': request.form.get('longitude'),
+                                'latitude': request.form.get('latitude')
                                 }
                 address = Store_Address(**address_options)
                 store = Store(**options)
@@ -83,7 +92,7 @@ def get_stores(user_id):
                 db.session.commit()
                 return jsonify({'message': 'Store created successfully', 'store_id': store.id, 'store_address_id': address.id}), 200
             elif request.method == 'PUT':
-                store_id = json_data['store_id']
+                store_id = request.form.get('store_id')
                 # store_address_id = request.form.get('store_address_id')
                 update_store = db.session.get(Store, store_id)
                 # update_store_address = db.session.get(Store_Address, store_address_id)

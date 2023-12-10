@@ -1,10 +1,29 @@
-from flask import Flask
+from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy
 # To Include migration for our database updates
 from flask_migrate import Migrate
+import os
+
 
 # Start the flask app
 app = Flask(__name__, static_url_path='/static', static_folder='static')
+
+# Configure the file upload
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+# Determine the absolute path for the upload folder
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Create the upload folder if it doesn't exist
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+upload_folder = app.config['UPLOAD_FOLDER']
 
 # configure sqlalchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'

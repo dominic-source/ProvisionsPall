@@ -37,27 +37,28 @@ $(function () {
             console.error('Geolocation is not supported by this browser.');
         }
     });
-    let options;
     $('#submit_store').on('click', function () {
-        options = {
-            'name': $('#name').val(),
-            'description': $('#description').val(),
-            'number': $('#number').val(),
-            'street': $('#street').val(),
-            'area': $('#area').val(),
-            'city': $('#city').val(),
-            'country': $('#country').val(),
-            'longitude': $('#longitude').val(),
-            'latitude': $('#latitude').val(),
-        }
+
+        let imageInput = $('#imageInput')[0].files[0];
+        let formData = new FormData();
+        formData.append('file', imageInput);
+        formData.append('name', $('#name').val());
+        formData.append('description', $('#description').val());
+        formData.append('number', $('#number').val());
+        formData.append('street', $('#street').val());
+        formData.append('area', $('#area').val());
+        formData.append('city', $('#city').val());
+        formData.append('country', $('#country').val());
+        formData.append('longitude', $('#longitude').val());
+        formData.append('latitude', $('#latitude').val());
+
         let id = $('#view').attr('data-user_id')
         $.ajax({
             url: "http://127.0.0.2:5001/api/v1/user/" + id + "/stores",
             type: 'POST',
-            data: JSON.stringify(options),
-            headers: {
-                "content-type": "application/json",
-            },
+            data: formData,
+            contentType: false,
+            processData: false,
             success: function (data) {
                 console.log("success");
                 $(".create_store").addClass("invisible");

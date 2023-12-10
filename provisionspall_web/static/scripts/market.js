@@ -3,7 +3,7 @@ $(function () {
     let store_id = $('#address').attr('data-store');
 
     // Display the addres when the button for address clicked
-    $('#address').on('click', function () {
+    $('#address, #address2').on('click', function () {
         $.ajax({
             url: "http://127.0.0.2:5001/api/v1/locate/" + store_id,
             type: 'GET',
@@ -81,7 +81,7 @@ $(function () {
                     // Create Card for stores
                     let element = `<a href='/market/store/${item.id}?${cache_id}' class="card uniqueElement"
                                 data-id="${item.id}">
-                                <img src="../static/images/img14.jpg?${cache_id}" alt="Store Image">
+                                <img src="../static/uploads/${item.image}?${cache_id}" alt="Store Image">
                                 <div class="card-content">
                                 <h2 class="card-title">${item.name}</h2>
                                 <p class="card-description">${item.description}</p>

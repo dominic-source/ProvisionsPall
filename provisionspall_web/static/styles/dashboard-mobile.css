@@ -77,7 +77,7 @@ button {
 
 @media screen and (max-width: 372px) {
     .dashboard {
-        top: 60%;
+        top: 90%;
     }
 }
 
@@ -97,7 +97,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 300px;
+    width: 100%;
     height: 90%;
     margin-bottom: 30px;
 }

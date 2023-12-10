@@ -1,7 +1,6 @@
 $(function () {
   // Make sure to store all values of store here before proceeding
-  let store = {};
-  let products = {};
+
   let url = "http://127.0.0.2:5001/api/v1";
 
   function generateUUID() {
@@ -20,9 +19,8 @@ $(function () {
       url: url,
       method: method,
       data: data,
-      headers: {
-        "content-type": "application/json",
-      },
+      contentType: false,
+      processData: false,
       success: function (data) {
         console.log("success");
       },
@@ -64,7 +62,7 @@ $(function () {
       for (let info of response) {
 
         let uniqueId = generateUUID();
-        let elem = `<h5>Store name: ${info.name} <button class="style_button submit_button store_del" data-id="${uniqueId}">delete</button></h5>`;
+        let elem = `<h5>Store name: ${info.name} <button class="style_button submit_button store_del" data-id="${info.id}">delete</button></h5>`;
         $(".dashboard_action").append(`<div id="${uniqueId}"></div>`);
         $(`.dashboard_action #${uniqueId}`).append(elem);
 
@@ -109,12 +107,12 @@ $(function () {
       // Update store data
       $(".submit").on("click", function (event) {
         id3 = $(this).attr('data-id');
-        options = {
-          'name': $('#' + id3 + ' input[name=name]').val(),
-          'description': $('#' + id3 + ' input[name=description]').val(),
-          'store_id': $('#' + id3 + ' input[name=id]').val(),
-        };
-        sendRequest(url + "/user/" + id + "/stores", method = 'PUT', data = JSON.stringify(options)).done(function (response) {
+        let formData = new FormData();
+        formData.append('name', $('#' + id3 + ' input[name=name]').val());
+        formData.append('description', $('#' + id3 + ' input[name=description]').val());
+        formData.append('store_id', $('#' + id3 + ' input[name=id]').val());
+
+        sendRequest(url + "/user/" + id + "/stores", method = 'PUT', data = formData).done(function (response) {
           $(".dashboard_action").empty();
           $(".dashboard_action").toggleClass("invisible");
           $(".view_products").addClass("invisible");
@@ -228,20 +226,35 @@ $(function () {
     $('#submit_store2').on('click', function () {
 
       let select_id = $('#mySelect').val();
-      let option_product = {
-        'name': $('#name2').val(),
-        'description': $('#description2').val(),
-        'price': $('#price').val(),
-        'category': $('#category').val(),
-        'store_id': select_id,
-      }
-      sendRequest(url + "/" + select_id + "/product", method = 'POST', data = JSON.stringify(option_product))
-        .done(function (info) {
-          // Remove all forms
+
+      let imageInput2 = $('#imageInput2')[0].files[0];
+      let formData = new FormData();
+      formData.append('file', imageInput2);
+      formData.append('name', $('#name2').val());
+      formData.append('description', $('#description2').val());
+      formData.append('price', $('#price').val());
+      formData.append('category', $('#category').val());
+      formData.append('store_id', select_id);
+
+      $.ajax({
+        url: url + "/" + select_id + "/product",
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          console.log("success");
           $('.create_products input').each((function () {
             $(this).val("");
           }));
-        });
+        },
+        error: function (xhr, status, error) {
+          console.log("error: ", error);
+          $('.create_products input').each((function () {
+            $(this).val("");
+          }));
+        },
+      });
     });
   });
 });

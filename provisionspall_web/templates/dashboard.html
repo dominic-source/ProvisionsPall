@@ -46,22 +46,26 @@
                     <button id="view" class="style_button style_input"
                         data-store_ids="{{ storedata }}"
                         data-user_id="{{ userdata.id }}">View user</button>
-                    <button id="edit" class="style_button style_input">Edit store details</button>
-                    <button id="produce" class="style_button style_input">View products
+                    <button id="edit" class="style_button style_input">Edit
+                        store details</button>
+                    <button id="produce" class="style_button style_input">View
+                        products
                     </button>
-                    <button id="create" class="style_button style_input">Create products</button>
+                    <button id="create" class="style_button style_input">Create
+                        products</button>
                 </nav>
                 <hr />
             </nav>
             <aside id="aside" class="invisible">
                 <aside id="blur" class="opacity"></aside>
                 <div class="user">
-                    <img src="../static/images/{{ userdata.image }}.jpg?{{ cache_id }}"
+                    <img
+                        src="../static/images/{{ userdata.image }}.jpg?{{ cache_id }}"
                         alt="Here is the user's picture"
                         width="100px"
                         height="100px"
                         class="user_image">
-                    <button id="close" class="style_button">close</button>
+                    <button id="close" class="style_button style_input">close</button>
                     <div class="user_details" data-store_ids="{{ storedata }}"
                         data-user_id="{{ userdata.id }}">
                         <h3>USER DETAILS</h3>
@@ -70,7 +74,7 @@
                         <h4>Number of stores: {{ stores }}</h4>
                         <h4>Number of Products: {{ products }}</h4>
                     </div>
-                    <button id="store" class="style_button"
+                    <button id="store" class="style_button style_input"
                         aria-label="Click this button to create store">Create a
                         Store</button>
                     <hr />
@@ -79,16 +83,16 @@
             <section aria-labelledby="store" class="create_store invisible">
                 <aside id="blur" class="opacity"></aside>
                 <main class="user">
-                    <button id="close2" class="style_button">close</button>
+                    <button id="close2" class="style_button style_input">close</button>
                     <input class="style_input store_input" value type="text"
                         name="name"
                         aria-label="This is where you type the store name"
-                        placeholder="Input name of store" id="name">
+                        placeholder="Input name of store" id="name" required>
                     <input class="style_input store_input" value type="text"
                         name="description"
                         aria-label="This is where you type the description"
                         placeholder="Type the description of your store"
-                        id="description">
+                        id="description" required>
                     <input class="style_input store_input" value type="text"
                         name="number"
                         aria-label="This is where you type the house number"
@@ -109,6 +113,11 @@
                         name="country"
                         aria-label="This is where you type the country"
                         placeholder="Type the country" id="country">
+                    <input class="style_input store_input" value type="file"
+                        name="image"
+                        aria-label="This is where you upload the image of the store"
+                        aria-disabled="false"
+                        id="imageInput" readonly title="File upload element">
                     <input class="style_input store_input" value type="text"
                         name="longitude"
                         aria-label="This is where you type the city"
@@ -119,7 +128,8 @@
                         aria-label="This is where you type the city"
                         aria-disabled="true"
                         id="latitude" readonly title="This field is readonly">
-                    <button id="submit_store" class="style_button">Create</button>
+
+                    <button id="submit_store" class="style_button style_input">Create</button>
                 </main>
             </section>
         </section>
@@ -155,6 +165,11 @@
                     name="category"
                     aria-label="This is where you type the category"
                     placeholder="Type the category" id="category">
+                <input class="style_input store_input" value type="file"
+                    name="image"
+                    aria-label="This is where you upload the image of the product"
+                    aria-disabled="false"
+                    id="imageInput2" readonly title="File upload element">
                 <button id="submit_store2" class="style_button submit_button">Create</button>
             </section>
         </main>

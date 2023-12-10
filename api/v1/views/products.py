@@ -5,6 +5,9 @@ from api.v1.views import app_views
 from flask import jsonify, request
 from api.v1 import db
 from models.model import Product, Store
+from provisionspall_web import UPLOAD_FOLDER, allowed_file
+import os
+from werkzeug.utils import secure_filename
 
 @app_views.route('/<store_id>/product', strict_slashes=False, methods=['POST', 'GET'])
 def products(store_id=None):
@@ -12,15 +15,22 @@ def products(store_id=None):
     # get all the products
 
     if request.method == 'POST':
-        json_data = request.get_json()
+        
+        # Handle file uploads
+        file = request.files.get('file')
+        filename = ''
+        if file and allowed_file(file.filename):                
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+
         if store_id:
             options = {
-                'name': json_data.get('name'),
-                'price': json_data.get('price'),
-                'description': json_data.get('description'),
-                'category': json_data.get('category'),
+                'name': request.form.get('name'),
+                'price': request.form.get('price'),
+                'description': request.form.get('description'),
+                'category': request.form.get('category'),
                 'store_id': store_id,
-                'image': json_data.get('image')
+                'image': filename
             }
         try:
             product = Product(**options)
