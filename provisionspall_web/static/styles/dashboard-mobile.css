@@ -43,9 +43,11 @@ button {
     color: black;
     text-decoration: none;
 }
+
 .asideItem:focus {
     color: var(--primary-color);
 }
+
 .bigDevice {
     display: none;
 }
@@ -220,7 +222,7 @@ hr {
 
 .login-link2 {
     text-decoration: none;
-    font-size: 25px;
+    font-size: 15px;
     color: var(--primary-color);
     padding: 5px;
 }
@@ -228,7 +230,6 @@ hr {
 .login-link2:hover,
 .login-link2:focus {
     color: var(--secondary-color);
-    font-size: 20px;
 }
 
 .opacity {
@@ -347,6 +348,10 @@ hr {
     /* Dashboard section */
     .dashboard {
         top: 200px;
+    }
+
+    .login-link2 {
+        font-size: 25px;
     }
 
     .store_input {

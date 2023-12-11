@@ -74,19 +74,20 @@ $(function () {
             // Arrange Element based on most probable value
             let startElements = '';
             let nextElements = '';
-            console.log(store_id);
+            // console.log(store_id, "give me a moment ");
             if (!store_id) {
                 // Loop over the stores to get the stores need
                 for (let item of items.stores) {
                     // Create Card for stores
                     let element = `<a href='/market/store/${item.id}?${cache_id}' class="card uniqueElement"
                                 data-id="${item.id}">
-                                <img src="../static/uploads/${item.image}?${cache_id}" alt="Store Image">
+                                <img src="/static/uploads/${item.image}?${cache_id}" alt="Store Image">
                                 <div class="card-content">
                                 <h2 class="card-title">${item.name}</h2>
                                 <p class="card-description">${item.description}</p>
                                 </div>
                             </a>`
+                    console.log(item);
                     if (item.name.startsWith(data)) startElements += element;
                     else if (item.name.includes(data)) nextElements += element;
                 }
@@ -96,7 +97,7 @@ $(function () {
                 for (let item of items.products) {
                     // Create Card for products
                     let element = `<div class="card uniqueElement" data-id="${item.id}">
-                                    <img src="/static/images/img14.jpg?${cache_id}"
+                                    <img src="/static/uploads/${item.image}?${cache_id}"
                                     alt="Product Image">
                                     <div class="card-content">
                                     <h2 class="card-title">${item.name}</h2>

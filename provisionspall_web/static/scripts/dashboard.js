@@ -31,9 +31,24 @@ $(function () {
     });
   };
 
+
+
   $("#view, .user_image_normal").on("click", function () {
     $("#aside").removeClass("invisible");
     $("body").addClass("body-overflow");
+
+    // Update the user information for each click
+    sendRequest(url + "/user/" + id).done(function (info) {
+      $("#user_details h4, #user_details h3").remove();
+      let element = ` <h3>USER DETAILS</h3>
+      <h4>User name: ${info[0].username}</h4>
+      <h4>Company name: ${info[0].stores[0].name}</h4>
+      <h4>Number of stores: ${info[0].stores.length}</h4>
+      <h4>Number of Products: ${info[0].products}</h4>`
+      $("#user_details").append(element);
+
+    });
+
   });
 
   $("#close").on("click", function () {
@@ -111,7 +126,6 @@ $(function () {
         formData.append('name', $('#' + id3 + ' input[name=name]').val());
         formData.append('description', $('#' + id3 + ' input[name=description]').val());
         formData.append('store_id', $('#' + id3 + ' input[name=id]').val());
-
         sendRequest(url + "/user/" + id + "/stores", method = 'PUT', data = formData).done(function (response) {
           $(".dashboard_action").empty();
           $(".dashboard_action").toggleClass("invisible");

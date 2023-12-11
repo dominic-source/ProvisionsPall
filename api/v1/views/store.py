@@ -8,6 +8,8 @@ from api.v1 import db
 from provisionspall_web import UPLOAD_FOLDER, allowed_file
 import os
 from werkzeug.utils import secure_filename
+    
+
 
 @app_views.route('/user/store/<store_id>', strict_slashes=False, methods=['DELETE', 'OPTIONS'])
 def delete_store(store_id):
@@ -51,7 +53,8 @@ def get_stores(user_id):
                     'name': store.name,
                     'description': store.description,
                     'date_created': store.date_created,
-                    'user_id': store.user_id
+                    'user_id': store.user_id,
+                    'image': store.image,
                 }
                 all_stores.append(store_details)
             return jsonify(all_stores), 200
@@ -97,6 +100,7 @@ def get_stores(user_id):
                 update_store = db.session.get(Store, store_id)
                 # update_store_address = db.session.get(Store_Address, store_address_id)
                 if update_store:
+                    print(options)
                     for key, value in options.items():
                         if value:
                             setattr(update_store, key, value)
@@ -127,7 +131,8 @@ def all_stores():
                     'name': store.name,
                     'description': store.description,
                     'date_created': store.date_created,
-                    'user_id': store.user_id
+                    'user_id': store.user_id,
+                    'image': store.image,
                 }
                 all_stores.append(store_details)
             return jsonify(all_stores), 200

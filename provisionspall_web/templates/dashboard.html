@@ -34,8 +34,9 @@
         <section role="navigation" style="max-height: 30%;">
             <header class="page_header">
                 <a href="/market" class="login-link2">ProvisionsPall</a>
-                <a href="/market" class="login-link style_button style_input">Market
-                    Place</a>
+                <a href="/market" class="login-link style_button style_input">Market Place</a>
+                <a href="/logout" class="login-link style_button style_input">Logout</a>
+
             </header>
             <nav class="user_container">
                 <img
@@ -66,7 +67,7 @@
                         height="100px"
                         class="user_image">
                     <button id="close" class="style_button style_input">close</button>
-                    <div class="user_details" data-store_ids="{{ storedata }}"
+                    <div class="user_details" id="user_details"
                         data-user_id="{{ userdata.id }}">
                         <h3>USER DETAILS</h3>
                         <h4>User name: {{ userdata.username }}</h4>
@@ -169,7 +170,7 @@
                     name="image"
                     aria-label="This is where you upload the image of the product"
                     aria-disabled="false"
-                    id="imageInput2" readonly title="File upload element">
+                    id="imageInput2" title="File upload element">
                 <button id="submit_store2" class="style_button submit_button">Create</button>
             </section>
         </main>

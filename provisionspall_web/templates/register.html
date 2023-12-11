@@ -8,8 +8,15 @@
         <link rel="stylesheet" type="text/css" href="../static/styles/login.css">
         <link rel="stylesheet" type="text/css"
             href="../static/styles/register.css">
+        <link rel="stylesheet" type="text/css"
+            href="{{url_for('static', filename='styles/dashboard-mobile.css')}}">
     </head>
     <body>
+        <header class="page_header">
+            <a href="/market" class="login-link2">ProvisionsPall</a>
+            <a href="/market" class="login-link style_button style_input">Market
+                Place</a>
+        </header>
         <section class="register-container">
             <form id="registrationForm" action="/register" method="post"
                 onsubmit="validationForm(event)" class="container" role="form">
@@ -30,7 +37,7 @@
                     required>
 
                 <input type="password" placeholder="Password" id="password"
-                    name="password" 
+                    name="password"
                     title="Please enter only letters and numbers" required>
 
                 <input type="password" placeholder="Confirm Password"

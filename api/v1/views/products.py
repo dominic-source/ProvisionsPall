@@ -72,14 +72,14 @@ def update_product(product_id=None):
     """Update a product"""
     
     if request.method == 'PUT':
-        json_data = request.get_json()
+        # json_data = request.get_json()
         if product_id:
             options = {
-                'name': json_data.get('name'),
-                'price': json_data.get('price'),
-                'description': json_data.get('description'),
-                'category': json_data.get('category'),
-                'image': json_data.get('image')
+                'name': request.form.get('name'),
+                'price': request.form.get('price'),
+                'description': request.form.get('description'),
+                'category': request.form.get('category'),
+                'image': request.form.get('image')
             }
         try:
             data = db.session.get(Product, product_id)
@@ -104,7 +104,8 @@ def update_product(product_id=None):
                     'category': data.category,
                     'id': data.id,
                     'date_created': data.date_created,
-                    'store_id': data.store_id
+                    'store_id': data.store_id,
+                    'image': data.image,
                 }
                 return jsonify(options), 200
             except Exception as e:

@@ -73,7 +73,16 @@ def store(id):
 def market():
     """To help us render the market page"""
     store = db.session.query(Store).all()
-    return render_template('marketplace.html', stores=store, cache_id=uuid.uuid4())
+
+    user_id = session.get('user_id')
+    if user_id:
+        logged = True
+    else:
+        logged = False
+    return render_template('marketplace.html', 
+                           stores=store, 
+                           cache_id=uuid.uuid4(), 
+                           logged=logged)
 
 @app.route('/market/store/<id>', strict_slashes=False)
 def market_store(id=None):
@@ -82,9 +91,21 @@ def market_store(id=None):
     if id is None:
         return redirect('/market')
     store = db.session.get(Store, id)
+
     if not len(store.products):
         return redirect('/market')
-    return render_template('market.html', products=store.products, cache_id=uuid.uuid4())
+    return render_template('market.html', 
+                           products=store.products, 
+                           cache_id=uuid.uuid4())
+
+@app.route('/logout', strict_slashes=False, methods=["GET"])
+def logout(id=None):
+    """To log users out of the session"""
+
+    session.pop('user_id', None)
+    return redirect("/market")  
+
+
 
 @app.route('/login', strict_slashes=False, methods=["GET", "POST"])
 def login():
@@ -125,8 +146,9 @@ def register():
             db.session.add(user)
             db.session.commit()
 
-            return redirect('/dashboard')
+            return redirect('/login')
         except IntegrityError as e:
+            print(e)
             db.session.rollback()
            
             return jsonify({'error': 'user already registered'})

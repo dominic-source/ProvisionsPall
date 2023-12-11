@@ -8,6 +8,10 @@
         margin: 10px 20px 10px 10px;
     }
 
+    .login-link2 {
+        font-size: 25px;
+    }
+
     .store_input {
         width: 350px !important;
         height: 30px;
@@ -39,7 +43,7 @@
         font-weight: 20px;
 
     }
-     
+
 
     .user_image_normal {
 

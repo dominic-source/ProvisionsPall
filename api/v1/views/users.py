@@ -81,6 +81,7 @@ def get_users(id=None):
                 objects = [d_object,]
             all_data = []
             for object_d in objects:
+                product_count = 0
                 data = {
                     'id': object_d.id,
                     'username': object_d.username,
@@ -90,6 +91,7 @@ def get_users(id=None):
                     'date_registered': object_d.date_created,
                     'addresses': [],
                     'stores': [],
+                    'products': product_count,
                 }
                 if object_d.addresses:
                     for addr in object_d.addresses:
@@ -109,11 +111,14 @@ def get_users(id=None):
                             'name': store.name,
                             'description': store.description,
                             'data_created': store.date_created,
+                            'products': len(store.products),
                         }
                         data['stores'].append(store_s)
+                        data['products'] += len(store.products)
                 all_data.append(data)
             return jsonify(all_data), 200
-        except Exception:
+        except Exception as e:
+            print(e)
             db.session.rollback()
             return jsonify({'Error': 'An error was encountered'}), 404
        

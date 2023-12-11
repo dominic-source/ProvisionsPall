@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 # To Include migration for our database updates
 from flask_migrate import Migrate
@@ -33,6 +33,10 @@ migrate = Migrate(app, db)
 
 with app.app_context():
     db.create_all()
+  
+    
+    
+    
     
     
 # Here is the code for apply migration of models (please read the comment carefully)
