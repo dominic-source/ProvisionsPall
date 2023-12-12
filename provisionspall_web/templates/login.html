@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <script src="login.js"></script>
+    <!-- <script src="login.js"></script> -->
     <link rel="stylesheet" type="text/css" href="../static/styles/login.css">
+      <!-- CSS and JS script element for the dashboard-->
+    <link href="../static/styles/dashboard-mobile.css?{{ cache_id }}"
+      rel="stylesheet">
 </head>
 <body>
 
+    <header class="page_header">
+        <a href="/market" class="login-link2">ProvisionsPall</a>
+        <a href="/market" class="login-link style_button style_input">Market Place</a>
+    </header>
     <div class="login-container">
         <h2>Login</h2>
-        <form onsubmit="login(event)" action="/login" method="post" class="container">
+        <form action="/login" method="post" class="container">
         
-            <input type="text" placeholder="username" id="username" name="username" pattern="[A-Za-z]+" title="Please enter only letters" required> </br>
+            <input type="text" placeholder="Username" id="username" name="username" title="Please enter only letters" required> </br>
 
         
-            <input type="password" placeholder="password" id="password" name="password" pattern="[A-Za-z0-9]+" title="Please enter only letters and numbers" required> </br>
+            <input type="password" placeholder="Password" id="password" name="password" title="Please enter only letters and numbers" required> </br>
 
             <div>
                 <input type="checkbox" id="remember" name="remember"> Remember Me

@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 
 from api.v1.views import app_views
-from flask import Flask, make_response, jsonify
+from flask import make_response, jsonify
 from flask_cors import CORS
+from api.v1 import app
 
-app = Flask(__name__)
+
 app.register_blueprint(app_views)
 
 cors = CORS(app, resources={r'/*': {'origins': 'http://127.0.0.1:5000'}})

@@ -1,74 +1,77 @@
+$(function () {
+    $('#store').on('click', function () {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    // Remove readonly attribute
+                    $('#longitude').removeAttr('readonly')
+                    $('#latitude').removeAttr('readonly')
 
-function initMap() {
+                    $('#longitude').val(longitude)
+                    $('#latitude').val(latitude)
+                    $('#longitude').attr('readonly', 'true')
+                    $('#latitude').attr('readonly', 'true')
 
-    // Map option
-    let options = {
-        center: { lat: 7.7190, lng: 5.3110 },
-        zoom: 10,
-    }
-
-    //New Map
-    let map = new google.maps.Map(document.getElementById("map"), options);
-
-    // listen for click on map location
-    /*
-        //Maker
-        let marker = new google.maps.Marker({
-            position: {lat: 7.7979, lng: 5.3286},
-            map: map,
-            icon: "https://img.icons8.com/nolan/2x/marker.png"
-        });
-    
-        // InfoWindow
-        const detailWindow = new google.maps.InfoWindow({
-            content: `<h2>Ikole City</h2>`,
-        });
-    
-        marker.addListener('mouseover', () => {
-            detailWindow.open(map, marker);
-        });
-    */
-    // Add Markers to array
-    MarkerArray = [
-        {
-            location: { lat: 7.7979, lng: 5.3286 },
-            imageIcon: "https://img.icons8.com/nolan/2x/marker.png",
-            content: `<h2>Ikole City</h2>`,
-        },
-        {
-            location: { lat: 7.4991, lng: 5.2319 },
-            content: `<h2>Ikere City</h2>`,
+                    // You can use latitude and longitude here as needed
+                },
+                function (error) {
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            console.error('User denied the request for Geolocation.');
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            console.error('Location information is unavailable.');
+                            break;
+                        case error.TIMEOUT:
+                            console.error('The request to get user location timed out.');
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            console.error('An unknown error occurred.');
+                            break;
+                    }
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
         }
-    ]
+    });
+    $('#submit_store').on('click', function () {
 
-    // Create a for loop for markers
-    for (let i = 0; i < MarkerArray.length; i++) {
-        addMarker(MarkerArray[i]);
-    }
+        let imageInput = $('#imageInput')[0].files[0];
+        let formData = new FormData();
+        formData.append('file', imageInput);
+        formData.append('name', $('#name').val());
+        formData.append('description', $('#description').val());
+        formData.append('number', $('#number').val());
+        formData.append('street', $('#street').val());
+        formData.append('area', $('#area').val());
+        formData.append('city', $('#city').val());
+        formData.append('country', $('#country').val());
+        formData.append('longitude', $('#longitude').val());
+        formData.append('latitude', $('#latitude').val());
 
-    // Add marker
-    function addMarker(property) {
-        let marker = new google.maps.Marker({
-            position: property.location,
-            map: map,
-            // icon: property.imageIcon,
+        let id = $('#view').attr('data-user_id')
+        $.ajax({
+            url: "http://127.0.0.2:5001/api/v1/user/" + id + "/stores",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log("success");
+                $(".create_store").addClass("invisible");
+                $("body").removeClass("body-overflow");
+            },
+            error: function (xhr, status, error) {
+                console.log("error: ", error);
+            },
         });
-        // Check custom Icon
-        if (property.imageIcon) {
-            // set image Icon
-            marker.setIcon(property.imageIcon);
-        }
-
-        if (property.content) {
-            // InfoWindow
-            const detailWindow = new google.maps.InfoWindow({
-                content: property.content,
-            });
-
-            marker.addListener('mouseover', () => {
-                detailWindow.open(map, marker);
-            });
-        }
-
-    }
-}
+    });
+   
+    $("#close2").on("click", function () {
+        $(".create_store").addClass("invisible");
+        $("body").removeClass("body-overflow");
+    });
+});

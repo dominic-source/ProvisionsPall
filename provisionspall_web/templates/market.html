@@ -1,40 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <title>ProvisionsPall</title>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="../static/scripts/googleapi.js" defer></script>
-        
-        <!-- Leaflet CSS -->
-         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-         crossorigin=""/>
-        
-         <!-- Leaflet JavaScript -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Store</title>
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='styles/dashboard-mobile.css') }}">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='styles/dashboard.css') }}">
+        <link rel="stylesheet" type="text/css"
+            href="{{ url_for('static', filename='styles/marketplace.css') }}">
 
-        <!-- OpenRouteService plugin -->
-        <script src="https://unpkg.com/leaflet-routing-machine@5.3.14/dist/leaflet-routing-machine.js"></script>
+        <script src="{{ url_for('static', filename='scripts/market.js') }}"
+            defer></script>
+        <!-- Here is Jquery script element -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
     </head>
     <body>
-        <header>
-            <h1>I am at the top but God is everything.</h1>
-        </header>
-        <section>
-            <p>We are doing the best we can, may God help us</p>
+        <section class="container">
+            <a href="/market" class="login-link2">ProvisionsPall</a>
+            <input type="text" id="searchBar" name="search_text"
+                class="search_text"
+                placeholder="Search...." value>
+            <a href="/store/{{ products[0].store_id }}"
+                class="login-link style_button style_input bigDevice">Locate
+                me</a>
+            <button id="address"
+                class="login-link style_button style_input bigDevice"
+                data-store="{{ products[0].store_id }}">Show
+                address</button>
+            <a href="/market"
+                class="login-link style_button style_input bigDevice">Market
+                Place</a>
+            <a href="/dashboard"
+                class="login-link style_button style_input bigDevice">My
+                Dashboard</a>
+            <!-- <aside class="addDevice"> -->
+            <aside class="device">
+                <h1 class="smallDevice">+</h1>
+
+                <a href="/store/{{ products[0].store_id }}"
+                    class="asideItem invisible">Locate me</a>
+                <a id="address2" class="asideItem invisible"
+                    data-store="{{ products[0].store_id }}">Show address</a>
+                <a href="/market" class="asideItem invisible">Market Place</a>
+                <a href="/dashboard" class="asideItem invisible">My Dashboard</a>
+            </aside>
+            <!-- </aside> -->
+
+            <aside id="aside" class="invisible">
+                <aside id="blur" class="opacity"></aside>
+                <address aria-label="Here is the store address invisible"
+                    class="user"
+                    id="store_address">
+                    <button id="close" class="style_button">close</button>
+                </address>
+            </aside>
         </section>
-        <footer>
-            <div id="map"
-                style='height: 500px; width: 500px;'
-                data-id="1224" 
-                data-name="chinonso" 
-                data-location="current">
+
+        <div class="image-grid" data-cache="{{ cache_id }}">
+            {% for product in products %}
+            <div class="card" data-id="{{ product.id }}">
+                <img
+                    src="{{ url_for('static', filename='uploads/' + product.image) }}"
+                    alt="Store Image">
+                <div class="card-content">
+                    <h2 class="card-title">{{ product.name }}</h2>
+                    <p class="card-description">{{ product.category }}</p>
+                    <p class="card-title">$ {{ product.price }}</p>
+                </div>
             </div>
-            <h3>It is nice down here</h3>
-        </footer>
-       
+            {% endfor %}
+        </div>
+        <div class="footer">
+            <p>&copy; 2023 ProvisionsPall. All Rights Reserved.</p>
+        </div>
     </body>
 </html>

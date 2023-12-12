@@ -9,21 +9,88 @@
     /* Emerald */
 }
 
-.body-overflow {
-    overflow: hidden;
-}
-
 button {
     cursor: pointer;
 }
 
+.create_store {
+    padding-top: 10px;
+}
+
 /* Dashboard section */
+
+.asideDash {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: 70%;
+    background-color: rgba(59, 250, 139, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 200px;
+    max-height: 250px;
+    padding-left: 10px;
+    box-shadow: 0 4px 8px rgba(46, 204, 112, 0.1);
+    backdrop-filter: blur(3px);
+}
+
+.asideItem {
+    color: black;
+    text-decoration: none;
+}
+
+.asideItem:focus {
+    color: var(--primary-color);
+}
+
+.bigDevice {
+    display: none;
+}
+
 .dashboard {
     position: absolute;
-    top: 30%;
+    top: 160px;
+    left: 7.5%;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 20px 10px 10px;
     width: 80%;
+}
+
+.smallDevice {
+    border-radius: 3.5px;
+    color: var(--accent-color);
+    font-weight: 900;
+    font-size: 50px;
+    text-align: center;
+    margin: 0px;
+}
+
+.rotate {
+    cursor: pointer;
+    transform: rotate(45deg);
+    color: black;
+    padding: 0px;
+}
+
+@media screen and (max-width: 372px) {
+    .dashboard {
+        top: 90%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .bigDevice {
+        display: inline-flex;
+    }
+
+    .smallDevice {
+        display: none;
+    }
 }
 
 .dashboard_action,
@@ -32,7 +99,9 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 300px;
+    width: 100%;
+    height: 90%;
+    margin-bottom: 30px;
 }
 
 .dashboard_action h4,
@@ -73,11 +142,17 @@ button {
     width: 90%;
 }
 
+.page_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
 
 .style_input {
     margin-bottom: 10px;
     margin-left: 10px;
-    max-width: 200px;
+    max-width: 400px;
     max-height: 150px;
     border-radius: 3.5px;
     border: 1px var(--accent-color) solid;
@@ -85,7 +160,9 @@ button {
 }
 
 .style_input:focus,
-.style_input:hover {
+.style_input:hover,
+#searchBar:hover,
+#searchBar:focus {
     outline-color: var(--accent-color);
     border-color: var(--accent-color);
 }
@@ -107,6 +184,7 @@ aside#blur {
     background-color: var(--accent-color);
     position: absolute;
     top: 0px;
+    left: 0px;
     height: 1000px;
     width: 100%;
     filter: blur(10px);
@@ -114,7 +192,8 @@ aside#blur {
     z-index: 3;
 }
 
-#close {
+#close,
+#close2 {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -122,12 +201,35 @@ aside#blur {
 }
 
 hr {
-    width: 150px;
+    max-width: 300px;
     border: 1px var(--accent-color) solid;
 }
 
 .invisible {
     display: none;
+}
+
+#latitude[readonly],
+#longitude[readonly] {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.login-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.login-link2 {
+    text-decoration: none;
+    font-size: 15px;
+    color: var(--primary-color);
+    padding: 5px;
+}
+
+.login-link2:hover,
+.login-link2:focus {
+    color: var(--secondary-color);
 }
 
 .opacity {
@@ -147,14 +249,15 @@ hr {
     margin: 15px;
     display: flex;
     align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-direction: column;
     width: 250px;
     height: 500px;
-    border: 1px var(--secondary-color) solid;
-    border-radius: 20px;
+    border: 1px #ccc solid;
+    border-radius: 10px;
     padding: 15px;
-    background-color: var(--primary-color);
-    color: white;
+    background-color: #fff;
+    /* color: white; */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     z-index: 3;
 }
@@ -169,16 +272,32 @@ hr {
 }
 
 .user_container button,
+.login-link,
 .submit_button,
-#close {
-    font-size: 9px;
+#close,
+#close2,
+#submit_store,
+#store {
+    max-height: 30px;
+    min-width: 20px;
+    font-size: 10px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 20px;
-    min-height: 20px;
+    font-weight: 15px;
 }
 
+.user_container button:focus,
+#close:focus,
+#store:focus,
+#close2:focus,
+.login-link:focus,
+#submit_store:focus,
+.submit_button:focus,
 .user_container button:hover,
 #close:hover,
+#store:hover,
+#close2:hover,
+.login-link:hover,
+#submit_store:hover,
 .submit_button:hover {
     color: white;
     background-color: var(--accent-color);
@@ -214,6 +333,7 @@ hr {
     border-radius: 50%;
     height: 50px;
     width: 50px;
+    margin: 10px;
 }
 
 .user_image_normal:hover {
@@ -227,7 +347,17 @@ hr {
 
     /* Dashboard section */
     .dashboard {
-        top: 150px;
+        top: 200px;
+    }
+
+    .login-link2 {
+        font-size: 25px;
+    }
+
+    .store_input {
+        width: 250px !important;
+        height: 25px;
+        font-size: 12px;
     }
 
     .user {
@@ -237,9 +367,15 @@ hr {
         height: 350px;
     }
 
-    .user_container button {
-        min-height: 30px;
-        min-width: 30px;
+    .user_container button,
+    #store,
+    .login-link,
+    .submit_button,
+    #close,
+    #close2,
+    #submit_store {
+        max-height: 30px;
+        min-width: 20px;
         font-size: 12px;
     }
 

@@ -1,7 +1,6 @@
 $(function () {
   // Make sure to store all values of store here before proceeding
-  let store = {};
-  let products = {};
+
   let url = "http://127.0.0.2:5001/api/v1";
 
   function generateUUID() {
@@ -14,14 +13,14 @@ $(function () {
       }
     );
   }
-
-  let sendRequest = (url) => {
+  let id = $(".user_details").data('user_id')
+  let sendRequest = (url, method = 'GET', data = null) => {
     return $.ajax({
       url: url,
-      method: "GET",
-      headers: {
-        "content-type": "application/xml",
-      },
+      method: method,
+      data: data,
+      contentType: false,
+      processData: false,
       success: function (data) {
         console.log("success");
       },
@@ -32,30 +31,56 @@ $(function () {
     });
   };
 
+
+
   $("#view, .user_image_normal").on("click", function () {
     $("#aside").removeClass("invisible");
     $("body").addClass("body-overflow");
+
+    // Update the user information for each click
+    sendRequest(url + "/user/" + id).done(function (info) {
+      $("#user_details h4, #user_details h3").remove();
+      let element = ` <h3>USER DETAILS</h3>
+      <h4>User name: ${info[0].username}</h4>
+      <h4>Company name: ${info[0].stores[0].name}</h4>
+      <h4>Number of stores: ${info[0].stores.length}</h4>
+      <h4>Number of Products: ${info[0].products}</h4>`
+      $("#user_details").append(element);
+
+    });
+
   });
+
   $("#close").on("click", function () {
     $("#aside").addClass("invisible");
     $("body").removeClass("body-overflow");
   });
 
-  $("#edit").on("click", function () {
+  $("#store").on("click", function () {
+    $("#aside").addClass("invisible");
+    $(".create_store").removeClass("invisible")
+    $("body").removeClass("body-overflow");
+  });
+
+  $("#edit").on("click", function (event) {
     $(".dashboard_action").toggleClass("invisible");
     $(".view_products").addClass("invisible");
     $(".create_products").addClass("invisible");
-    sendRequest(url + "/store").done(function (response) {
+    sendRequest(url + "/user/" + id + "/stores").done(function (response) {
       // Remove all forms
       $(".dashboard_action").empty();
 
       // Add data
       $(".dashboard_action").append(
-        "<h4 id='up'> Edit store details details:</h4>"
+        "<h4 id='up'> Edit store details:</h4>"
       );
       for (let info of response) {
-        let elem = `<h5>Store name: ${info.name} </h5>`;
-        $(".dashboard_action").append(elem);
+
+        let uniqueId = generateUUID();
+        let elem = `<h5>Store name: ${info.name} <button class="style_button submit_button store_del" data-id="${info.id}">delete</button></h5>`;
+        $(".dashboard_action").append(`<div id="${uniqueId}"></div>`);
+        $(`.dashboard_action #${uniqueId}`).append(elem);
+
         for (let data in info) {
           let randomId = generateUUID();
           let element = `<label for="${randomId}" class="label_me"> 
@@ -66,14 +91,15 @@ $(function () {
                 name="${data}" aria-label="${info.description}" 
                 id="${randomId}">`;
 
-          $(".dashboard_action").append(element);
+          $(`.dashboard_action  #${uniqueId}`).append(element);
         }
-        $(".view_products").append("<hr />");
+        $(`.dashboard_action  #${uniqueId}`).append(
+          `<button class="style_button submit_button submit" data-id="${uniqueId}">Update</button>`
+        );
+        $(`.dashboard_action  #${uniqueId}`).append("<hr />");
+
       }
-      $(".dashboard_action").append(
-        '<a href="#submit" class="end">bottom</a><a href="#up" class="top">top</a><button id="submit" class="style_button submit_button">Save</button>'
-      );
-      $(".dashboard_action .open").on("click", function () {
+      $(`.dashboard_action .open`).on("click", function (event) {
         if ($(this).html() === "edit") {
           $(this).html("close");
           $("#" + $(this).attr("data-id")).removeClass("invisible");
@@ -82,12 +108,30 @@ $(function () {
           $("#" + $(this).attr("data-id")).addClass("invisible");
         }
       });
-      // Dashboard
-      $(".dashboard_action input").on("change", function () {
-        store[$(this).attr("name")] = $(this).val();
+
+      // Delete a store
+      $(".store_del").on("click", function (event) {
+        let id2 = $(this).attr('data-id');
+        sendRequest(url + "/user/store/" + id2, method = 'DELETE').done(function (response) {
+          $(".dashboard_action").empty();
+          $(".dashboard_action").toggleClass("invisible");
+          $(".view_products").addClass("invisible");
+          $(".create_products").addClass("invisible");
+        });
       });
-      $("#submit").on("click", function () {
-        console.log(store);
+      // Update store data
+      $(".submit").on("click", function (event) {
+        id3 = $(this).attr('data-id');
+        let formData = new FormData();
+        formData.append('name', $('#' + id3 + ' input[name=name]').val());
+        formData.append('description', $('#' + id3 + ' input[name=description]').val());
+        formData.append('store_id', $('#' + id3 + ' input[name=id]').val());
+        sendRequest(url + "/user/" + id + "/stores", method = 'PUT', data = formData).done(function (response) {
+          $(".dashboard_action").empty();
+          $(".dashboard_action").toggleClass("invisible");
+          $(".view_products").addClass("invisible");
+          $(".create_products").addClass("invisible");
+        });
       });
     });
   });
@@ -97,51 +141,86 @@ $(function () {
     $(".view_products").toggleClass("invisible");
     $(".dashboard_action").addClass("invisible");
     $(".create_products").addClass("invisible");
+    $(".view_products section").empty();
 
-    sendRequest(url + "/products").done(function (response) {
-      // Remove all forms
-      $(".view_products").empty();
+    // Send a request to get all stores information
+    sendRequest(url + "/user/" + id + "/stores").done(function (info) {
+      $('#mySelect2').empty();
+      $('#mySelect2').append(`<option selected disabled>Select an option</option>`)
 
-      // Add data
-      $(".view_products").append("<h4 id='top'> View all products</h4>");
+      for (let data of info) {
+        $('#mySelect2').append(`<option value="${data.id}" class="style_button" >${data.name}</option>`)
+      }
+      $('#mySelect2').on('change', function () {
+        let select_id2 = $('#mySelect2').val();
+        sendRequest(url + "/" + select_id2 + "/product").done(function (response) {
+          // console.log(response);
+          $(".view_products section").empty();
 
-      for (let info of response) {
-        products[info["id"]] = {};
-        let name = `<h5 data-id="${info["id"]}">Product name: ${info.name} </h5>`;
-        $(".view_products").append(name);
-        for (let newData in info) {
-          let randomId = generateUUID();
-          let element = `<label for="${randomId}" class="label_me"> 
+          // List all the products
+          $(".view_products section").append("<h4> View all products</h4>");
+
+          for (let info of response) {
+            let uniqueId = generateUUID();
+            let name = `<h5 data-id="${info["id"]}">Product name: ${info.name} <button class="style_button submit_button product_del" data-id="${uniqueId}">delete</button></h5>`;
+            $(".view_products section").append(`<div id="${uniqueId}"></div>`);
+            $(`.view_products section #${uniqueId}`).append(name);
+            for (let newData in info) {
+              let randomId = generateUUID();
+              let element = `<label for="${randomId}" class="label_me"> 
            <h6>${newData}: ${info[newData]}</h6>
            <button class="style_button submit_button open" data-id="${randomId}">edit</button>
            </label>
            <input class="style_input invisible" value="${info[newData]}" type="text" 
                name="${newData}" aria-label="${info.description}" 
                 id="${randomId}">`;
-          $(".view_products").append(element);
-        }
-        $(".view_products").append("<hr />");
-      }
-      $(".view_products").append(
-        '<a href="#submit2" class="end">bottom</a><a href="#top" class="top">top</a><button id="submit2" class="style_button submit_button">Save</button>'
-      );
+              $(`.view_products #${uniqueId}`).append(element);
+            }
+            $(`.view_products #${uniqueId}`).append(
+              `<button class="style_button submit_button submit2" data-id="${uniqueId}">update</button>`
+            );
+            $(`.view_products #${uniqueId}`).append("<hr />");
+          }
 
-      $(".view_products .open").on("click", function () {
-        if ($(this).html() === "edit") {
-          $(this).html("close");
-          $("#" + $(this).attr("data-id")).removeClass("invisible");
-        } else {
-          $(this).html("edit");
-          $("#" + $(this).attr("data-id")).addClass("invisible");
-        }
-      });
-      // view Board
-      $(".view_products input").on("change", function () {
-        let id = $(".view_products h5").attr("data-id");
-        products[id][$(this).attr("name")] = $(this).val();
-      });
-      $("#submit2").on("click", function () {
-        console.log(products);
+          $(".view_products .open").on("click", function () {
+            if ($(this).html() === "edit") {
+              $(this).html("close");
+              $("#" + $(this).attr("data-id")).removeClass("invisible");
+            } else {
+              $(this).html("edit");
+              $("#" + $(this).attr("data-id")).addClass("invisible");
+            }
+          });
+
+          // Delete a product
+          $(".product_del").on("click", function (event) {
+            let id5 = $(this).attr('data-id');
+            let p_id = $('#' + id5 + ' input[name=id]').val();
+            sendRequest(url + "/product/" + p_id, method = 'DELETE').done(function (response) {
+              $(".view_products").toggleClass("invisible");
+              $(".dashboard_action").addClass("invisible");
+              $(".create_products").addClass("invisible");
+              console.log(response);
+            });
+          });
+
+          // Update product
+          $(".submit2").on("click", function () {
+            let id4 = $(this).attr('data-id');
+            p_options = {
+              'name': $('#' + id4 + ' input[name=name]').val(),
+              'description': $('#' + id4 + ' input[name=description]').val(),
+              'category': $('#' + id4 + ' input[name=category]').val(),
+              'price': $('#' + id4 + ' input[name=price]').val(),
+            };
+            let p_id = $('#' + id4 + ' input[name=id]').val();
+            sendRequest(url + "/product/" + p_id, method = 'PUT', data = JSON.stringify(p_options)).done(function (response) {
+              $(".view_products").toggleClass("invisible");
+              $(".dashboard_action").addClass("invisible");
+              $(".create_products").addClass("invisible");
+            });
+          });
+        });
       });
     });
   });
@@ -152,43 +231,43 @@ $(function () {
     $(".dashboard_action").addClass("invisible");
     $(".create_products").toggleClass("invisible");
 
-    sendRequest(url + "/products").done(function (info) {
-      // Remove all forms
-      $(".create_products").empty();
-      $(".create_products").append("<h4 id='upper'> Add a new product:</h4>");
-
-      // Add data
-      for (let data in info[7]) {
-        let randomId = generateUUID();
-        let element = `<label for="${randomId}" class="label_me"> 
-           </label>
-           <input class="style_input" value type="text" 
-               name="${data}" aria-label="This is where you type ${data}" 
-               placeholder="Type the ${data} here" id="${randomId}">`;
-
-        $(".create_products").append(element);
+    // Send a request to get all stores information
+    sendRequest(url + "/user/" + id + "/stores").done(function (info) {
+      for (let data of info) {
+        $('#mySelect').append(`<option value="${data.id}">${data.name}</option>`)
       }
-      $(".create_products").append(
-        '<a href="#submit3" class="end">bottom</a><a href="#upper" class="top">top</a><button id="submit3" class="style_button submit_button">create</button>'
-      );
+    });
+    $('#submit_store2').on('click', function () {
 
-      $(".create_products .open").on("click", function () {
-        if ($(this).html() === "edit") {
-          $(this).html("close");
-          $("#" + $(this).attr("data-id")).removeClass("invisible");
-        } else {
-          $(this).html("edit");
-          $("#" + $(this).attr("data-id")).addClass("invisible");
-        }
-      });
+      let select_id = $('#mySelect').val();
 
-      // create product
-      $(".create_products input").on("change", function () {
-        products[$(this).attr("name")] = $(this).val();
-      });
-      $("#submit3").on("click", function () {
-        $(".create_products input").val("");
-        console.log(products);
+      let imageInput2 = $('#imageInput2')[0].files[0];
+      let formData = new FormData();
+      formData.append('file', imageInput2);
+      formData.append('name', $('#name2').val());
+      formData.append('description', $('#description2').val());
+      formData.append('price', $('#price').val());
+      formData.append('category', $('#category').val());
+      formData.append('store_id', select_id);
+
+      $.ajax({
+        url: url + "/" + select_id + "/product",
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          console.log("success");
+          $('.create_products input').each((function () {
+            $(this).val("");
+          }));
+        },
+        error: function (xhr, status, error) {
+          console.log("error: ", error);
+          $('.create_products input').each((function () {
+            $(this).val("");
+          }));
+        },
       });
     });
   });
