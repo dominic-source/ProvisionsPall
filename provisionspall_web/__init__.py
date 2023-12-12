@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 # To Include migration for our database updates
 from flask_migrate import Migrate
 import os
+import secrets
 
 
 # Start the flask app
@@ -24,6 +25,10 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 upload_folder = app.config['UPLOAD_FOLDER']
+
+
+# To generate secret keys for managing sessions cookies
+app.secret_key = secrets.token_hex()
 
 # configure sqlalchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'

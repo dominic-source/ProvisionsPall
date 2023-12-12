@@ -87,9 +87,8 @@ $(function () {
                                 <p class="card-description">${item.description}</p>
                                 </div>
                             </a>`
-                    console.log(item);
-                    if (item.name.startsWith(data)) startElements += element;
-                    else if (item.name.includes(data)) nextElements += element;
+                    if (item.name.toUpperCase().startsWith(data.toUpperCase())) startElements += element;
+                    else if (item.name.toUpperCase().includes(data.toUpperCase())) nextElements += element;
                 }
 
             } else {
@@ -105,8 +104,8 @@ $(function () {
                                     <p class="card-title">$ ${item.price}</p>
                                     </div>
                                 </div>`
-                    if (item.name.startsWith(data)) startElements += element;
-                    else if (item.name.includes(data)) nextElements += element;
+                    if (item.name.toUpperCase().startsWith(data.toUpperCase())) startElements += element;
+                    else if (item.name.toUpperCase().includes(data.toUpperCase())) nextElements += element;
                 }
             }
 

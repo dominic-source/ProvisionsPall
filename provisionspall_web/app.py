@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 """This module handles the route for provisions pall"""
-from flask import render_template, request, jsonify, make_response, redirect, url_for, session
+from flask import render_template, request, jsonify, make_response, redirect, url_for, session, flash
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
 from provisionspall_web import app, db
 from models.model import User, Store, Product
 import uuid
 
-app.secret_key = 'fsafabzfgtgrtjo4389uj3opjpwroijninhgwi'
 cors = CORS(app, resources={r'/api/*': {'origins': 'http://127.0.0.2:5001'}})
 
 @app.route("/", strict_slashes=False)
