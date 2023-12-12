@@ -53,5 +53,16 @@ Some API Endpoints
 /user_addresses, /store_addresses: [GET, POST] - Manage user and store addresses.
 /geocaching: [POST] - Calculate estimated distance between stores and user's location.
 
-## Screenshot 
+## Screenshot of Login page
 ![Screenshot of our web application](https://github.com/dominic-source/ProvisionsPall/blob/master/provisionspall_web/static/images/Screenshot%20from%202023-12-12%2019-42-04.png)
+
+## Screenshot of Dashboard page
+![Screenshot of our web application](https://github.com/dominic-source/ProvisionsPall/blob/master/provisionspall_web/static/images/Screenshot%20from%202023-12-12%2019-42-26.png)
+
+## Screenshot of Dashboard page showing the edit details section
+![Screenshot of our web application](https://github.com/dominic-source/ProvisionsPall/blob/master/provisionspall_web/static/images/Screenshot%20from%202023-12-12%2019-42-53.png)
+
+## Screenshot of Market place for all users
+![Screenshot of our web application](https://github.com/dominic-source/ProvisionsPall/blob/master/provisionspall_web/static/images/Screenshot%20from%202023-12-12%2019-43-35.png)
+
+## Licence
