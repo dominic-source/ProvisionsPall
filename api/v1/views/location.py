@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module manages all the products of provisionspall"""
+"""This module manages users location"""
 
 from flask import jsonify, request
 from api.v1.views import app_views
@@ -10,9 +10,9 @@ from api.v1 import db
 @app_views.route('/locate/<store_id>', strict_slashes=False, methods=['GET'])
 def locate_me(store_id):
     """Get current location of users store"""
+    
     # Check the user or stores location from the database
     # if present return information
-
     if request.method == 'GET':
         try:
             data = db.session.get(Store, store_id)

@@ -1,8 +1,14 @@
-# from flask_sqlalchemy import SQLAlchemy
-# from flask import Flask
+#!/usr/bin/python3
+"""Create models for the application
+    here are the models: 
+        User
+        Store
+        Product
+        User_Address
+        Store_Address
+"""
 from datetime import datetime
-from provisionspall_web import app, db
-# app = Flask(__name__)
+from provisionspall_web import db
 
 class User(db.Model):
     """ Model for user basic info """
@@ -56,7 +62,7 @@ class Store(db.Model):
 
 
 class Store_Address(db.Model):
-    """ Model for user address """
+    """ Model for store address """
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer)
     street = db.Column(db.String(120), nullable=False)
@@ -73,6 +79,8 @@ class Store_Address(db.Model):
 
 
 class Product(db.Model):
+    """Model for products in stores"""
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)

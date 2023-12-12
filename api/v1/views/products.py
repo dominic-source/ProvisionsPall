@@ -68,8 +68,8 @@ def products(store_id=None):
                 return jsonify({'Error': 'An error was encountered'}), 400
    
 @app_views.route('/product/<product_id>', strict_slashes=False, methods=['PUT', 'GET', 'DELETE'])
-def update_product(product_id=None):
-    """Update a product"""
+def manage_products(product_id=None):
+    """It handles update, getting and deleting a single product"""
     
     if request.method == 'PUT':
         # json_data = request.get_json()
@@ -123,9 +123,3 @@ def update_product(product_id=None):
                 print(e)
                 db.session.rollback()
                 return jsonify({'Error': 'An error was encountered'}), 400
-
-@app_views.route('/products_search', strict_slashes=False, methods=['POST'])
-def products_search():
-    """Get all the products"""
-    # search for products
-    return jsonify({'id': '4325tstr', 'name': 'mango fruits'})

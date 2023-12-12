@@ -37,6 +37,7 @@ $(function () {
             console.error('Geolocation is not supported by this browser.');
         }
     });
+    // The submit button for Store creation
     $('#submit_store').on('click', function () {
 
         let imageInput = $('#imageInput')[0].files[0];

@@ -7,7 +7,6 @@ from models.model import User
 from api.v1 import db
 
 
-@app_views.route('/user', strict_slashes=False, methods=['DELETE'])
 @app_views.route('/user/<id>', strict_slashes=False, methods=['DELETE'])
 def delete_user(id=None):
     """This will delete a single user"""
@@ -20,9 +19,9 @@ def delete_user(id=None):
             return jsonify({'Message': 'successfully deleted the user'})
         except Exception:
             db.session.rollback()
-            return jsonify({'Error': 'Could not delete the user'})
+            return jsonify({'Error': 'Could not delete the user'}), 400
     else:
-        return jsonify({'Error': 'Id is required or requirement was not met'})        
+        return jsonify({'Error': 'Id is required or requirement was not met'}), 400      
 
 
 @app_views.route('/user', strict_slashes=False, methods=['POST'])

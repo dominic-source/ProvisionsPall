@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This module handles the route for provisions pall"""
+
 from flask import render_template, request, jsonify, make_response, redirect, url_for, session, flash
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
@@ -11,13 +12,13 @@ cors = CORS(app, resources={r'/api/*': {'origins': 'http://127.0.0.2:5001'}})
 
 @app.route("/", strict_slashes=False)
 def landing_page():
-    """This is the first route for test the api"""
+    """This is the route for our landing page"""
 
     return render_template('landing_page.html', cache_id=uuid.uuid4())
 
 @app.route('/dashboard', strict_slashes=False)
 def dashboard():
-    """To help us render the dashboard page"""
+    """To help us render the dashboard page for store and user management"""
     try:
         user_id = session.get('user_id')
         if user_id:
@@ -37,6 +38,7 @@ def dashboard():
             store_ids = ''
             total_stores = 0
             total_products = 0
+
             # Add store information to dashboard
             for store in stores:
                 products = db.session.query(Product)
@@ -63,14 +65,14 @@ def dashboard():
 
 @app.route('/store/<id>', strict_slashes=False)
 def store(id):
-    """To help us render the store page"""
+    """To help us render the google map page to locate store address"""
     if id is None:
         return redirect('/market')
     return render_template('store.html', cache_id=uuid.uuid4(), store_id=id, apiKey=app.config['API_KEY'])
 
 @app.route('/market', strict_slashes=False)
 def market():
-    """To help us render the market page"""
+    """To help us render the market place page"""
     store = db.session.query(Store).all()
 
     user_id = session.get('user_id')
@@ -129,7 +131,8 @@ def login():
 
 @app.route('/register', strict_slashes=False, methods=["GET", "POST"])
 def register():
-    """To help us render the login page"""
+    """To help us render the register page"""
+
     if request.method == 'GET':
         return render_template('register.html')
     elif request.method == 'POST':

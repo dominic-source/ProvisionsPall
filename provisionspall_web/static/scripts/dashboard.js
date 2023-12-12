@@ -1,8 +1,10 @@
 $(function () {
   // Make sure to store all values of store here before proceeding
 
+  // The url of the application
   let url = "http://127.0.0.2:5001/api/v1";
 
+  // A function to generate unique Id for elements
   function generateUUID() {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
       /[xy]/g,
@@ -13,7 +15,10 @@ $(function () {
       }
     );
   }
+  // Here is the user Id
   let id = $(".user_details").data('user_id')
+
+  // a variable that returns an Ajax request
   let sendRequest = (url, method = 'GET', data = null) => {
     return $.ajax({
       url: url,
@@ -51,17 +56,20 @@ $(function () {
 
   });
 
+  // The close button
   $("#close").on("click", function () {
     $("#aside").addClass("invisible");
     $("body").removeClass("body-overflow");
   });
 
+  // The create store button
   $("#store").on("click", function () {
     $("#aside").addClass("invisible");
     $(".create_store").removeClass("invisible")
     $("body").removeClass("body-overflow");
   });
 
+  // The dashboarb special button
   $("#edit").on("click", function (event) {
     $(".dashboard_action").toggleClass("invisible");
     $(".view_products").addClass("invisible");
@@ -74,6 +82,7 @@ $(function () {
       $(".dashboard_action").append(
         "<h4 id='up'> Edit store details:</h4>"
       );
+      // Looping over the response gotten from the AJAX request
       for (let info of response) {
 
         let uniqueId = generateUUID();
@@ -81,6 +90,7 @@ $(function () {
         $(".dashboard_action").append(`<div id="${uniqueId}"></div>`);
         $(`.dashboard_action #${uniqueId}`).append(elem);
 
+        // Looping over each item in the array from the response
         for (let data in info) {
           let randomId = generateUUID();
           let element = `<label for="${randomId}" class="label_me"> 
@@ -237,6 +247,8 @@ $(function () {
         $('#mySelect').append(`<option value="${data.id}">${data.name}</option>`)
       }
     });
+
+    // The submit button for product creation
     $('#submit_store2').on('click', function () {
 
       let select_id = $('#mySelect').val();

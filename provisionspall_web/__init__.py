@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
 # To Include migration for our database updates
 from flask_migrate import Migrate
 import os
@@ -16,7 +17,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# Determine the absolute path for the upload folder
+# Determines the absolute path for the upload folder
 UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -24,13 +25,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-upload_folder = app.config['UPLOAD_FOLDER']
-
-
 # To generate secret keys for managing sessions cookies
 app.secret_key = secrets.token_hex()
 
-# Configure api key
+# Add google map api key to configuration
 app.config['API_KEY'] = 'AIzaSyCtRXnkNE4h6eeqCg0IoTyMXqyHrfbOYLI'
 
 # configure sqlalchemy

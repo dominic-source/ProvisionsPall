@@ -8,7 +8,6 @@ from api.v1 import db
 from provisionspall_web import UPLOAD_FOLDER, allowed_file
 import os
 from werkzeug.utils import secure_filename
-    
 
 
 @app_views.route('/user/store/<store_id>', strict_slashes=False, methods=['DELETE', 'OPTIONS'])
@@ -36,6 +35,7 @@ def delete_store(store_id):
 @app_views.route('/user/<user_id>/stores', strict_slashes=False, methods=['GET', 'POST', 'PUT', 'OPTIONS'])
 def get_stores(user_id):
     """Get all the stores as requested"""
+
     if request.method == 'OPTIONS':
         response = make_response()
         response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5000")
@@ -62,7 +62,9 @@ def get_stores(user_id):
         except Exception: 
             db.session.rollback()
             return jsonify({'Error': 'Could not get store data at this time'}), 400
+
     elif request.method == 'POST' or request.method == 'PUT':
+        # Handle a post and get request
         try:
             # Handle file uploads
             file = request.files.get('file')
@@ -96,17 +98,12 @@ def get_stores(user_id):
                 return jsonify({'message': 'Store created successfully', 'store_id': store.id, 'store_address_id': address.id}), 200
             elif request.method == 'PUT':
                 store_id = request.form.get('store_id')
-                # store_address_id = request.form.get('store_address_id')
                 update_store = db.session.get(Store, store_id)
-                # update_store_address = db.session.get(Store_Address, store_address_id)
                 if update_store:
                     print(options)
                     for key, value in options.items():
                         if value:
                             setattr(update_store, key, value)
-                    # for key, value in address_options.items():
-                    #     if value:
-                    #         setattr(update_store_address, key, value)
                     db.session.commit()
                     return jsonify({'Message': 'Updated successfully', 'store_id': store_id}), 200
                 else:
