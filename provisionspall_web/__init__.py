@@ -30,6 +30,9 @@ upload_folder = app.config['UPLOAD_FOLDER']
 # To generate secret keys for managing sessions cookies
 app.secret_key = secrets.token_hex()
 
+# Configure api key
+app.config['API_KEY'] = 'AIzaSyCtRXnkNE4h6eeqCg0IoTyMXqyHrfbOYLI'
+
 # configure sqlalchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)

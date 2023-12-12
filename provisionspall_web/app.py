@@ -66,7 +66,7 @@ def store(id):
     """To help us render the store page"""
     if id is None:
         return redirect('/market')
-    return render_template('store.html', cache_id=uuid.uuid4(), store_id=id)
+    return render_template('store.html', cache_id=uuid.uuid4(), store_id=id, apiKey=app.config['API_KEY'])
 
 @app.route('/market', strict_slashes=False)
 def market():
