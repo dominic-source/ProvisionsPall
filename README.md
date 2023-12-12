@@ -5,7 +5,7 @@
 This repository contains the source code for ProvisionsPal, a web application that enables users to estimate distances between stores and their current location using geocaching.
 
 ## Visit our application at the marketplace
-![Visit us here](https://www.cadaservices.tech/market)
+[Visit us here](https://www.cadaservices.tech/market)
 
 ## Features
 
