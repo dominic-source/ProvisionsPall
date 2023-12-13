@@ -20,7 +20,7 @@ This repository contains the source code for ProvisionsPal, a web application th
 - Flask: A lightweight web application framework.
 - SQLAlchemy: An SQL toolkit and Object-Relational Mapping (ORM) library.
 - Javascript
-- SQLLite
+- SQLite
 - HTML/CSS
 
 ## Installation (local installation)
@@ -44,9 +44,6 @@ python3 -m provisionspall_web.app
 ```bash
 python3 -m api.v1.app
 ```
-
-## Usage
--  Enter this on your browser: http://127.0.0.1:5000
 
 ## Basic specification for API(to be updated soon)
 
