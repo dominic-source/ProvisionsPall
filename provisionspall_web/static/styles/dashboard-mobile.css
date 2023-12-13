@@ -79,7 +79,7 @@ button {
 
 @media screen and (max-width: 372px) {
     .dashboard {
-        top: 90%;
+        top: 35%;
     }
 }
 
@@ -148,7 +148,9 @@ button {
     align-items: center;
     padding: 10px;
 }
-
+#imageInput {
+    width: 180px;
+}
 .style_input {
     margin-bottom: 10px;
     margin-left: 10px;
@@ -251,7 +253,7 @@ hr {
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-direction: column;
-    width: 250px;
+    width: 300px;
     height: 500px;
     border: 1px #ccc solid;
     border-radius: 10px;
@@ -355,7 +357,7 @@ hr {
     }
 
     .store_input {
-        width: 250px !important;
+        width: 250px;
         height: 25px;
         font-size: 12px;
     }

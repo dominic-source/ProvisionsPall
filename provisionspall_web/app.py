@@ -14,7 +14,7 @@ cors = CORS(app, resources={r'/api/*': {'origins': 'http://127.0.0.2:5001'}})
 def landing_page():
     """This is the route for our landing page"""
 
-    return render_template('landing_page.html', cache_id=uuid.uuid4())
+    return render_template('marketplace.html', cache_id=uuid.uuid4())
 
 @app.route('/dashboard', strict_slashes=False)
 def dashboard():
@@ -74,7 +74,8 @@ def store(id):
 def market():
     """To help us render the market place page"""
     store = db.session.query(Store).all()
-
+    if not store:
+        return "<h1>error getting page</h1>"
     user_id = session.get('user_id')
     if user_id:
         logged = True

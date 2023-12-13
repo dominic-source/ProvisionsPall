@@ -55,7 +55,7 @@ $(function () {
 
         let id = $('#view').attr('data-user_id')
         $.ajax({
-            url: "http://127.0.0.2:5001/api/v1/user/" + id + "/stores",
+            url: "https://www.cadaservices.tech/provisionspall_api/api/v1" + id + "/stores",
             type: 'POST',
             data: formData,
             contentType: false,

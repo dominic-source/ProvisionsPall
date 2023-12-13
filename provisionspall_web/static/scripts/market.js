@@ -5,7 +5,7 @@ $(function () {
     // Display the addres when the button for address clicked
     $('#address, #address2').on('click', function () {
         $.ajax({
-            url: "http://127.0.0.2:5001/api/v1/locate/" + store_id,
+            url: "https://www.cadaservices.tech/provisionspall_api/api/v1/locate/" + store_id,
             type: 'GET',
             header: {
                 'Content-Type': 'application/json',
@@ -38,9 +38,9 @@ $(function () {
     // to save having to get data for each input
     let url;
     if (!store_id) {
-        url = "http://127.0.0.2:5001/api/v1/stores";
+        url = "https://www.cadaservices.tech/provisionspall_api/api/v1/stores"
     } else {
-        url = `http://127.0.0.2:5001/api/v1/${store_id}/product`;
+        url = `https://www.cadaservices.tech/provisionspall_api/api/v1/${store_id}/product`;
     }
 
     let items = {};

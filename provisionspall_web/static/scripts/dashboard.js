@@ -2,7 +2,7 @@ $(function () {
   // Make sure to store all values of store here before proceeding
 
   // The url of the application
-  let url = "http://127.0.0.2:5001/api/v1";
+  let url = "https://www.cadaservices.tech/provisionspall_api/api/v1";
 
   // A function to generate unique Id for elements
   function generateUUID() {
@@ -69,7 +69,7 @@ $(function () {
     $("body").removeClass("body-overflow");
   });
 
-  // The dashboarb special button
+  // The dashboard special button
   $("#edit").on("click", function (event) {
     $(".dashboard_action").toggleClass("invisible");
     $(".view_products").addClass("invisible");
@@ -243,7 +243,8 @@ $(function () {
 
     // Send a request to get all stores information
     sendRequest(url + "/user/" + id + "/stores").done(function (info) {
-      for (let data of info) {
+    $('#mySelect option').remove()  
+    for (let data of info) {
         $('#mySelect').append(`<option value="${data.id}">${data.name}</option>`)
       }
     });
