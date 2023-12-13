@@ -72,7 +72,7 @@ button {
 
 .rotate {
     cursor: pointer;
-    transform: rotate(45deg);
+    transform: rotate(90deg);
     color: black;
     padding: 0px;
 }
