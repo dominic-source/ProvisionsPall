@@ -120,24 +120,22 @@ $(function () {
     });
 
 
-    // For mobile phones
-    $('.smallDevice').on('click', function () {
+    // For mobile phones    
+    $('.smallDevice').on('click', function inner() {
         $(this).toggleClass('rotate');
         $('.device').toggleClass('asideDash');
         $('.asideItem').toggleClass('invisible');
 
         $(window).on('resize', function () {
             let windowWidth = $(window).width();
-            if (windowWidth > 499) {
+            if (windowWidth > 500) {
                 $('.smallDevice').removeClass('rotate');
                 $('.device').removeClass('asideDash');
                 $('.asideItem').addClass('invisible');
-            } else {
-                if (windowWidth < 499) {
-                    $('.smallDevice').addClass('rotate');
-                    $('.device').addClass('asideDash');
-                    $('.asideItem').removeClass('invisible');
-                }
+            } else if (windowWidth < 500) {
+                    $('.smallDevice').removeClass('rotate');
+                    $('.device').removeClass('asideDash');
+                    $('.asideItem').addClass('invisible');
             }
         });
     });
