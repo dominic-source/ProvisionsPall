@@ -48,13 +48,27 @@ python3 -m api.v1.app
 ## Usage
 -  Enter this on your browser: http://127.0.0.1:5000
 
+## Basic specification for API(to be updated soon)
 
-Some API Endpoints
-/users: [GET, POST, PUT, DELETE] - Manage user information.
-/stores: [GET, POST, PUT, DELETE] - Manage store information.
-/products: [GET, POST, PUT, DELETE] - Manage product information.
-/user_addresses, /store_addresses: [GET, POST] - Manage user and store addresses.
-/geocaching: [POST] - Calculate estimated distance between stores and user's location.
+**Manage user information.**
+- /provisionspall_api/api/v1/users: [GET] 
+- /provisionspall_api/api/v1/user/<id>: [GET] 
+- /provisionspall_api/api/v1/user: [POST]
+- /provisionspall_api/api/v1/user/<id>: [PUT]
+- /provisionspall_api/api/v1/user/<id>: [DELETE]
+
+**Manage store information.**
+- /provisionspall_api/api/v1/user/store/<store_id>: [DELETE, OPTIONS] 
+- /provisionspall_api/api/v1/user/<user_id>/stores: [GET, POST, PUT, OPTIONS]
+- /provisionspall_api/api/v1/stores: [GET, POST, PUT, OPTIONS]
+
+**Manage product information.**
+- /provisionspall_api/api/v1/<store_id>/product: [GET, POST]
+- /provisionspall_api/api/v1/product/<product_id>: [GET, PUT, DELETE]
+
+**Get addresses and location**
+- /provisionspall_api/api/v1/locate/<store_id>: [GET]
+- /provisionspall_api/api/v1/all_stores: [GET]
 
 ## Screenshot of Login page
 ![Screenshot of our web application](https://github.com/dominic-source/ProvisionsPall/blob/master/provisionspall_web/static/images/Screenshot%20from%202023-12-12%2019-42-04.png)
