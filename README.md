@@ -35,8 +35,9 @@ cd ProvisionsPal
 2. Create a virtual environment
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
+pip3 -r install requirements.txt
 python3 -m provisionspall_web.app
 ```
 3. Create another terminal for the API service and enter this command
