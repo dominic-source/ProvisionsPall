@@ -4,7 +4,7 @@
 from flask import render_template, request, jsonify, make_response, redirect, url_for, session, flash
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
-from provisionspall_web import app, db
+from provisionspall_web import app, db, bcrypt
 from models.model import User, Store, Product
 import uuid
 
@@ -120,12 +120,12 @@ def login():
         users = db.session.query(User).all()
         for user in users:
             if user.username == username:
-                if user.password == password:
+                if bcrypt.check_password_hash(user.password, password):
                     response = make_response(redirect(url_for("dashboard", user_id=user.id)))
                     session['user_id'] = user.id
                     return response
                 else:
-                    return jsonify({"error": "Wrong password or username"}), 400
+                    return render_template("login.html", error="Wrong password or username"), 400
 
         return render_template("register.html", cache_id=uuid.uuid4()), 200
                 
@@ -142,7 +142,7 @@ def register():
         'first_name': request.form.get('first_name'),
         'last_name': request.form.get('last_name'),
         'email': request.form.get('email'),
-        'password': request.form.get('password')
+        'password': bcrypt.generate_password_hash(request.form.get('password')).decode('utf-8')
         }
         try:
             user = User(**options)
@@ -154,7 +154,7 @@ def register():
             print(e)
             db.session.rollback()
            
-            return jsonify({'error': 'user already registered'})
+            return render_template("register.html", error='user already registered')
         except Exception as e: 
          
             db.session.rollback()

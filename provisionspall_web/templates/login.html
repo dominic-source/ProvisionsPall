@@ -17,6 +17,13 @@
         <a href="/market" class="login-link style_button style_input">Market Place</a>
     </header>
     <div class="login-container">
+	    {% if error %}
+		<div style="color: #ff0000;
+			  background-color: rgba(255, 0, 0, 0.1);
+			  padding: 8px;
+			  border-radius: 5px;">
+		{{ error }}</div>
+	    {% endif %}
         <h2>Login</h2>
         <form action="/login" method="post" class="container">
         

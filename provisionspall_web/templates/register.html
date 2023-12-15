@@ -18,6 +18,13 @@
                 Place</a>
         </header>
         <section class="register-container">
+	    {% if error %}
+                <div style="color: #ff0000;
+                          background-color: rgba(255, 0, 0, 0.1);
+                          padding: 8px;
+                          border-radius: 5px;">
+                {{ error }}</div>
+            {% endif %}
             <form id="registrationForm" action="/register" method="post"
                 onsubmit="validationForm(event)" class="container" role="form">
                 <h2>Register</h2>

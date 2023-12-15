@@ -39,11 +39,10 @@ migrate = Migrate(app, db)
 
 with app.app_context():
     db.create_all()
-  
-    
-    
-    
-    
+
+# Password hashing with Bcrypt
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)    
     
 # Here is the code for apply migration of models (please read the comment carefully)
 # flask db init  # Initialize migrations (run this command only once)
