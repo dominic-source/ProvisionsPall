@@ -1,4 +1,5 @@
 $(function () {
+    let url = "https://www.cadaservices.tech/provisionspall_api/api/v1";
     $('#store').on('click', function () {
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(
@@ -55,7 +56,7 @@ $(function () {
 
         let id = $('#view').attr('data-user_id')
         $.ajax({
-            url: "https://www.cadaservices.tech/provisionspall_api/api/v1" + id + "/stores",
+            url: url + "/user/" + id + "/stores",
             type: 'POST',
             data: formData,
             contentType: false,

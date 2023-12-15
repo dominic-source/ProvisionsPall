@@ -38,8 +38,6 @@ def get_stores(user_id):
 
     if request.method == 'OPTIONS':
         response = make_response()
-        response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5000")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
         response.headers.add("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS")
         return response
     elif request.method == 'GET':

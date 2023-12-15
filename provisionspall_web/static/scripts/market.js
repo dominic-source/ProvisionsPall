@@ -1,11 +1,11 @@
 $(function () {
 
     let store_id = $('#address').attr('data-store');
-
+    let url = "https://www.cadaservices.tech/provisionspall_api/api/v1";
     // Display the addres when the button for address clicked
     $('#address, #address2').on('click', function () {
         $.ajax({
-            url: "https://www.cadaservices.tech/provisionspall_api/api/v1/locate/" + store_id,
+            url: url + "/locate/" + store_id,
             type: 'GET',
             header: {
                 'Content-Type': 'application/json',
@@ -36,16 +36,16 @@ $(function () {
 
     // Get the all stores or product information
     // to save having to get data for each input
-    let url;
+    let url2;
     if (!store_id) {
-        url = "https://www.cadaservices.tech/provisionspall_api/api/v1/stores"
+        url2 = url + "/stores";
     } else {
-        url = `https://www.cadaservices.tech/provisionspall_api/api/v1/${store_id}/product`;
+        url2 = `${url}/${store_id}/product`;
     }
 
     let items = {};
     $.ajax({
-        url: url,
+        url: url2,
         type: 'GET',
         header: {
             'Content-Type': 'application/json',

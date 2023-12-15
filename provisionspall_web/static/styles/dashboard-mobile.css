@@ -352,6 +352,24 @@ hr {
         top: 200px;
     }
 
+    .dashboard_action h4,
+    .create_products h4,
+    .view_products h4 {
+        font-size: 30px;
+    }
+
+    .dashboard_action h5,
+    .create_products h5,
+    .view_products h5 {
+        font-size: 25px;
+    }
+
+    .dashboard_action h6,
+    .create_products h6,
+    .view_products h6 {
+        font-size: 20px;
+    }
+
     .login-link2 {
         font-size: 25px;
     }

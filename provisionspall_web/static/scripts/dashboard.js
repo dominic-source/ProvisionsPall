@@ -32,7 +32,6 @@ $(function () {
       error: function (xhr, status, error) {
         console.log("error: ", error);
       },
-      dataType: "json",
     });
   };
 
@@ -47,7 +46,7 @@ $(function () {
       $("#user_details h4, #user_details h3").remove();
       let element = ` <h3>USER DETAILS</h3>
       <h4>User name: ${info[0].username}</h4>
-      <h4>Company name: ${info[0].stores[0].name}</h4>
+      <h4>Company name: ${info[0].stores.length == 0 ? "No name yet" : info[0].stores[0].name}</h4>
       <h4>Number of stores: ${info[0].stores.length}</h4>
       <h4>Number of Products: ${info[0].products}</h4>`
       $("#user_details").append(element);
@@ -217,14 +216,13 @@ $(function () {
           // Update product
           $(".submit2").on("click", function () {
             let id4 = $(this).attr('data-id');
-            p_options = {
-              'name': $('#' + id4 + ' input[name=name]').val(),
-              'description': $('#' + id4 + ' input[name=description]').val(),
-              'category': $('#' + id4 + ' input[name=category]').val(),
-              'price': $('#' + id4 + ' input[name=price]').val(),
-            };
+	    let formData = new FormData();
+            formData.append('name', $('#' + id4 + ' input[name=name]').val());
+            formData.append('description', $('#' + id4 + ' input[name=description]').val());
+            formData.append('price', $('#' + id4 + ' input[name=price]').val());
+            formData.append('category', $('#' + id4 + ' input[name=category]').val());
             let p_id = $('#' + id4 + ' input[name=id]').val();
-            sendRequest(url + "/product/" + p_id, method = 'PUT', data = JSON.stringify(p_options)).done(function (response) {
+            sendRequest(url + "/product/" + p_id, method = 'PUT', data = formData).done(function (response) {
               $(".view_products").toggleClass("invisible");
               $(".dashboard_action").addClass("invisible");
               $(".create_products").addClass("invisible");
