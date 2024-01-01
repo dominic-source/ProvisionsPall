@@ -8,7 +8,7 @@ from provisionspall_web import app, db, bcrypt
 from models.model import User, Store, Product
 import uuid
 
-cors = CORS(app, resources={r'/api/*': {'origins': 'http://127.0.0.2:5001'}})
+# cors = CORS(app, resources={r'/api/*': {'origins': 'http://127.0.0.2:5001'}})
 
 @app.route("/", strict_slashes=False)
 def landing_page():
