@@ -14,7 +14,8 @@ import uuid
 def landing_page():
     """This is the route for our landing page"""
 
-    return render_template('marketplace.html', cache_id=uuid.uuid4())
+    return redirect("/market") 
+    # return render_template('marketplace.html', cache_id=uuid.uuid4())
 
 @app.route('/dashboard', strict_slashes=False)
 def dashboard():
