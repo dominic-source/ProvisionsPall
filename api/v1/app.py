@@ -8,7 +8,7 @@ from api.v1 import app
 
 app.register_blueprint(app_views)
 
-cors = CORS(app, resources={r'/*': {'origins': 'https://cadaservices.tech/'}})
+cors = CORS(app, resources={r'/*': {'origins': 'https://api-services-swfd.onrender.com/'}})
 
 @app.teardown_appcontext
 def close_db(error):
