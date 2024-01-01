@@ -1,5 +1,5 @@
 $(function () {
-    let url = "https://www.cadaservices.tech/provisionspall_api/api/v1";
+    let url = "https://api-services-swfd.onrender.com/api/v1";
     $('#store').on('click', function () {
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(
