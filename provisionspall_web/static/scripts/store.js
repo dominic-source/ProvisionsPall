@@ -78,7 +78,7 @@ const mapStyle = [{
 
 function initMap() {
     get_id = document.getElementById('map').dataset.ids;
-    let url = "https://www.cadaservices.tech/provisionspall_api/api/v1/locate/" + get_id;
+    let url = "https://api-services-swfd.onrender.com/api/v1/locate/" + get_id;
     fetch(url)
         .then((response) => {
             if (!response.ok) {
