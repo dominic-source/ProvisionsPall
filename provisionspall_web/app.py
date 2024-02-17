@@ -73,7 +73,7 @@ def store(id):
 @app.route('/market', strict_slashes=False)
 def market():
     """To help us render the market place page"""
-    store = db.session.query(Store).all()
+    store = db.session.query(Store)
     # print(store)
     # if not store:
     #     print(store)

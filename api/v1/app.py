@@ -8,7 +8,8 @@ from provisionspall_web import app
 
 app.register_blueprint(app_views)
 
-cors = CORS(app, resources={r'/*': {'origins': 'https://provisionspall.onrender.com'}})
+cors = CORS(app, resources={r'/*': {'origins': 'https://provisionspall.onrender.com'},
+                            r'/*': {'origins': 'https://api-services-swfd.onrender.com'}})
 
 @app.teardown_appcontext
 def close_db(error):
