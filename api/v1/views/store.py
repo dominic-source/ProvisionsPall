@@ -26,7 +26,7 @@ def delete_store(store_id):
             return jsonify({'Error': 'Could not delete the store'}), 400
     elif request.method == 'OPTIONS':
         response = make_response()
-        response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5000")
+        response.headers.add("Access-Control-Allow-Origin", "https://provisionspall.onrender.com")
         response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
         response.headers.add("Access-Control-Allow-Methods", "DELETE")
         return response
