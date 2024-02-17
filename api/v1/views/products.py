@@ -3,7 +3,7 @@
 
 from api.v1.views import app_views
 from flask import jsonify, request
-from api.v1 import db
+from provisionspall_web import db
 from models.model import Product, Store
 from provisionspall_web import UPLOAD_FOLDER, allowed_file
 import os

@@ -4,7 +4,7 @@
 from flask import jsonify, request
 from api.v1.views import app_views
 from models.model import Store_Address, Store, User
-from api.v1 import db
+from provisionspall_web import db
 
 
 @app_views.route('/locate/<store_id>', strict_slashes=False, methods=['GET'])

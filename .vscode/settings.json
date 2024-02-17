@@ -1,0 +1,6 @@
+{
+    "JSON-zain.json.autorefresh": true,
+    "json.maxItemsComputed": 5000,
+    "json.format.keepLines": false,
+    "json.schemaDownload.enable": true
+}

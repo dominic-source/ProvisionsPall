@@ -4,7 +4,7 @@
 from api.v1.views import app_views
 from flask import request, jsonify
 from models.model import User
-from api.v1 import db
+from provisionspall_web import db
 
 
 @app_views.route('/user/<id>', strict_slashes=False, methods=['DELETE'])

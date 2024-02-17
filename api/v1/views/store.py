@@ -4,7 +4,7 @@
 from api.v1.views import app_views
 from flask import jsonify, request, make_response
 from models.model import User, Store, Store_Address
-from api.v1 import db
+from provisionspall_web import db
 from provisionspall_web import UPLOAD_FOLDER, allowed_file
 import os
 from werkzeug.utils import secure_filename
