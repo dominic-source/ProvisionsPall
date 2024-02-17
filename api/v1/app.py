@@ -3,7 +3,7 @@
 from api.v1.views import app_views
 from flask import make_response, jsonify
 from flask_cors import CORS
-from api.v1 import app
+from provisionspall_web import app
 
 
 app.register_blueprint(app_views)
