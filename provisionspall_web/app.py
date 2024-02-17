@@ -149,7 +149,6 @@ def register():
             user = User(**options)
             db.session.add(user)
             db.session.commit()
-            print(user)
             return redirect('/login')
         except IntegrityError as e:
             print(e)
@@ -157,7 +156,7 @@ def register():
            
             return render_template("register.html", error='user already registered')
         except Exception as e: 
-         
+            print(e)
             db.session.rollback()
             return jsonify({'error': 'An unexpected error occured'})
 
