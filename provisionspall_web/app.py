@@ -74,8 +74,10 @@ def store(id):
 def market():
     """To help us render the market place page"""
     store = db.session.query(Store).all()
-    if not store:
-        return "<h1>error getting page</h1>"
+    # print(store)
+    # if not store:
+    #     print(store)
+    #     return "<h1>error getting page</h1>"
     user_id = session.get('user_id')
     if user_id:
         logged = True
