@@ -149,7 +149,7 @@ def register():
             user = User(**options)
             db.session.add(user)
             db.session.commit()
-
+            print(user)
             return redirect('/login')
         except IntegrityError as e:
             print(e)
