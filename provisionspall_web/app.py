@@ -143,7 +143,7 @@ def register():
         'first_name': request.form.get('first_name'),
         'last_name': request.form.get('last_name'),
         'email': request.form.get('email'),
-        'password': bcrypt.generate_password_hash(request.form.get('password')).decode('utf-8')
+        'password': bcrypt.generate_password_hash(request.form.get('password'))
         }
         try:
             user = User(**options)
