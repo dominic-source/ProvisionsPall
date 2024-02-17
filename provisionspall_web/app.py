@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 """This module handles the route for provisions pall"""
 
-from flask import render_template, request, jsonify, make_response, redirect, url_for, session, flash
+from flask import render_template, request, jsonify, make_response, redirect, url_for, session
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
 from provisionspall_web import app, db, bcrypt
 from models.model import User, Store, Product
 import uuid
 
-# cors = CORS(app, resources={r'/api/*': {'origins': 'http://127.0.0.2:5001'}})
 
 @app.route("/", strict_slashes=False)
 def landing_page():
@@ -143,7 +142,7 @@ def register():
         'first_name': request.form.get('first_name'),
         'last_name': request.form.get('last_name'),
         'email': request.form.get('email'),
-        'password': bcrypt.generate_password_hash(request.form.get('password'))
+        'password': bcrypt.generate_password_hash(request.form.get('password')).decode('utf-8')
         }
         try:
             user = User(**options)
@@ -153,7 +152,6 @@ def register():
         except IntegrityError as e:
             print(e)
             db.session.rollback()
-           
             return render_template("register.html", error='user already registered')
         except Exception as e: 
             print(e)
