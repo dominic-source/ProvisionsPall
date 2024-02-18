@@ -17,6 +17,8 @@ def delete_store(store_id):
     if request.method == 'DELETE':
         try:
             store_del = db.session.get(Store, store_id)
+            if not store_del:
+                return jsonify({'Message': 'Not seen to delete.'}), 400
             db.session.delete(store_del)
             db.session.commit()
             return jsonify({'Message': 'successfully deleted the store'}), 200
@@ -118,7 +120,7 @@ def all_stores():
     """Find stores matching the parameters"""
     if request.method == 'GET':
         try:
-            stores = db.session.query(Store)
+            stores = db.session.query(Store).all()
             all_stores = []
             for store in stores:
                 store_details = {

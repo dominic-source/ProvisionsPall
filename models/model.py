@@ -31,7 +31,7 @@ class User(db.Model):
 
 class User_Address(db.Model):
     """ Model for user address """
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     house_no = db.Column(db.Integer)
     street = db.Column(db.String(120))
     area = db.Column(db.String(120))
@@ -46,7 +46,7 @@ class User_Address(db.Model):
 
 class Store(db.Model):
     """ Model for store basic info """
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.Text, nullable=False)
     image = db.Column(db.String(150), nullable=True, default='img14')
@@ -63,7 +63,7 @@ class Store(db.Model):
 
 class Store_Address(db.Model):
     """ Model for store address """
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     number = db.Column(db.Integer)
     street = db.Column(db.String(120), nullable=False)
     area = db.Column(db.String(120), nullable=False)
@@ -81,7 +81,7 @@ class Store_Address(db.Model):
 class Product(db.Model):
     """Model for products in stores"""
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
