@@ -73,7 +73,7 @@ def store(id):
 @app.route('/market', strict_slashes=False)
 def market():
     """To help us render the market place page"""
-    store = db.session.query(Store)
+    store = db.session.query(Store).all()
     # print(store)
     # if not store:
     #     print(store)
@@ -84,7 +84,7 @@ def market():
     else:
         logged = False
     return render_template('marketplace.html', 
-                           stores=store, 
+                           stores=store,
                            cache_id=uuid.uuid4(), 
                            logged=logged)
 
