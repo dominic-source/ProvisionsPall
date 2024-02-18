@@ -95,7 +95,8 @@ def market_store(id=None):
     if id is None:
         return redirect('/market')
     store = db.session.get(Store, id)
-
+    if not store:
+        return redirect('/market')
     if not len(store.products):
         return redirect('/market')
     return render_template('market.html', 
