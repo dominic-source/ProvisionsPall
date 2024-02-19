@@ -7,6 +7,24 @@ from flask_cors import CORS
 from provisionspall_web import app, db, bcrypt
 from models.model import User, Store, Product
 import uuid
+from provisionspall_web.api.v1.views import app_views
+
+app.register_blueprint(app_views)
+
+cors = CORS(app, resources={r'/api/v1/*': {'origins': ['http://localhost:5000', 'https://provisionspall.onrender.com']}})
+
+
+@app.teardown_appcontext
+def close_db(error):
+    """Close the database"""
+    pass
+
+
+@app.errorhandler(404)
+def not_found(error):
+    """Returns 404 error with and object indicate not found"""
+
+    return make_response(jsonify({'error': 'not found'}), 404)
 
 
 @app.route("/", strict_slashes=False)
@@ -15,6 +33,7 @@ def landing_page():
 
     return redirect("/market") 
     # return render_template('marketplace.html', cache_id=uuid.uuid4())
+
 
 @app.route('/dashboard', strict_slashes=False)
 def dashboard():
@@ -70,6 +89,7 @@ def store(id):
         return redirect('/market')
     return render_template('store.html', cache_id=uuid.uuid4(), store_id=id, apiKey=app.config['API_KEY'])
 
+
 @app.route('/market', strict_slashes=False)
 def market():
     """To help us render the market place page"""
@@ -103,13 +123,13 @@ def market_store(id=None):
                            products=store.products, 
                            cache_id=uuid.uuid4())
 
+
 @app.route('/logout', strict_slashes=False, methods=["GET"])
 def logout(id=None):
     """To log users out of the session"""
 
     session.pop('user_id', None)
     return redirect("/market")  
-
 
 
 @app.route('/login', strict_slashes=False, methods=["GET", "POST"])

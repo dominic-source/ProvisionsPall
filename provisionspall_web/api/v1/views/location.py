@@ -2,7 +2,7 @@
 """This module manages users location"""
 
 from flask import jsonify, request
-from api.v1.views import app_views
+from provisionspall_web.api.v1.views import app_views
 from models.model import Store_Address, Store, User
 from provisionspall_web import db
 
@@ -87,5 +87,3 @@ def locate_all_stores():
         except Exception as e:
             db.session.rollback()
             return jsonify({'Error': 'An error occurred while trying to get store location'})
-    
-   

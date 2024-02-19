@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module manages all the products of provisionspall"""
 
-from api.v1.views import app_views
+from provisionspall_web.api.v1.views import app_views
 from flask import jsonify, request, make_response
 from models.model import User, Store, Store_Address
 from provisionspall_web import db
