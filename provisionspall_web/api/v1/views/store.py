@@ -88,6 +88,8 @@ def get_stores(user_id):
                                 'longitude': request.form.get('longitude'),
                                 'latitude': request.form.get('latitude')
                                 }
+                if options.get('image') == '':
+                    del options['image']
                 address = Store_Address(**address_options)
                 store = Store(**options)
                 store.user_id = user_id
