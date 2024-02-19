@@ -79,7 +79,7 @@ def get_stores(user_id):
                 'image': filename
             }
             if options.get('image') == '':
-                del options['image']
+                options['image'] = 'img4'
             if request.method == 'POST':
                 address_options = { 
                                 'number': request.form.get('number'),
