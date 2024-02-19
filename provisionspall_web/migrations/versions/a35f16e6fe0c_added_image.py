@@ -1,8 +1,8 @@
-"""start
+"""added image
 
-Revision ID: f7d611f80529
+Revision ID: a35f16e6fe0c
 Revises: 
-Create Date: 2024-02-17 13:34:44.995167
+Create Date: 2024-02-19 15:26:20.417272
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f7d611f80529'
+revision = 'a35f16e6fe0c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,6 +41,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('id'),
     sa.UniqueConstraint('name')
     )
     op.create_table('user__address',
@@ -52,7 +53,8 @@ def upgrade():
     sa.Column('country', sa.String(length=120), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('id')
     )
     op.create_table('product',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -64,7 +66,8 @@ def upgrade():
     sa.Column('date_created', sa.DateTime(), nullable=False),
     sa.Column('store_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['store_id'], ['store.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('id')
     )
     op.create_table('store__address',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -77,7 +80,8 @@ def upgrade():
     sa.Column('latitude', sa.Integer(), nullable=True),
     sa.Column('store_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['store_id'], ['store.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('id')
     )
     # ### end Alembic commands ###
 
