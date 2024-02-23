@@ -5,7 +5,7 @@
 This repository contains the source code for ProvisionsPal, a web application that enables users to connect with businesses and get their location for easy access.
 
 ## Visit our application at the marketplace
-[Visit us here](https://provisionspall.onrender.com/market)
+[Visit us here](https://provisionspall-hwvs.onrender.com/market)
 
 ## Features
 
@@ -49,24 +49,24 @@ python3 -m api.v1.app
 ## Basic specification for API(to be updated soon)
 
 **Manage user information.**
-- https://provisionspall.onrender.com/api/v1/users: [GET] 
-- https://provisionspall.onrender.com/api/v1/user/<id>: [GET] 
-- https://provisionspall.onrender.com/api/v1/user: [POST]
-- https://provisionspall.onrender.com/api/v1/user/<id>: [PUT]
-- https://provisionspall.onrender.com/api/v1/user/<id>: [DELETE]
+- https://provisionspall-hwvs.onrender.com/api/v1/users: [GET] 
+- https://provisionspall-hwvs.onrender.com/api/v1/user/<id>: [GET] 
+- https://provisionspall-hwvs.onrender.com/api/v1/user: [POST]
+- https://provisionspall-hwvs.onrender.com/api/v1/user/<id>: [PUT]
+- https://provisionspall-hwvs.onrender.com/api/v1/user/<id>: [DELETE]
 
 **Manage store information.**
-- https://provisionspall.onrender.com/api/v1/user/store/<store_id>: [DELETE, OPTIONS] 
-- https://provisionspall.onrender.com/api/v1/user/<user_id>/stores: [GET, POST, PUT, OPTIONS]
-- https://provisionspall.onrender.com/api/v1/stores: [GET, POST, PUT, OPTIONS]
+- https://provisionspall-hwvs.onrender.com/api/v1/user/store/<store_id>: [DELETE, OPTIONS] 
+- https://provisionspall-hwvs.onrender.com/api/v1/user/<user_id>/stores: [GET, POST, PUT, OPTIONS]
+- https://provisionspall-hwvs.onrender.com/api/v1/stores: [GET, POST, PUT, OPTIONS]
 
 **Manage product information.**
-- https://provisionspall.onrender.com/api/v1/<store_id>/product: [GET, POST]
-- https://provisionspall.onrender.com/api/v1/product/<product_id>: [GET, PUT, DELETE]
+- https://provisionspall-hwvs.onrender.com/api/v1/<store_id>/product: [GET, POST]
+- https://provisionspall-hwvs.onrender.com/api/v1/product/<product_id>: [GET, PUT, DELETE]
 
 **Get addresses and location**
-- https://provisionspall.onrender.com/api/v1/locate/<store_id>: [GET]
-- https://provisionspall.onrender.com/api/v1/all_stores: [GET]
+- https://provisionspall-hwvs.onrender.com/api/v1/locate/<store_id>: [GET]
+- https://provisionspall-hwvs.onrender.com/api/v1/all_stores: [GET]
 
 ## Screenshot of Login page
 ![Screenshot of our web application](https://github.com/dominic-source/ProvisionsPall/blob/master/provisionspall_web/static/images/Screenshot%20from%202023-12-12%2019-42-04.png)
