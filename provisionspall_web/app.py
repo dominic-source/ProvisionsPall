@@ -31,7 +31,7 @@ def not_found(error):
 def landing_page():
     """This is the route for our landing page"""
 
-    return redirect("https://cadatech-portfolio.vercel.app/") 
+    return redirect("/market") 
     # return render_template('marketplace.html', cache_id=uuid.uuid4())
 
 
