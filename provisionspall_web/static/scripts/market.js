@@ -1,7 +1,8 @@
 $(function () {
 
     let store_id = $('#address').attr('data-store');
-    let url = "https://provisionspall.onrender.com/api/v1";
+    let url = "https://provisionspall-hwvs.onrender.com/api/v1";
+    // let url = "http://localhost:5000/api/v1";
     // Display the addres when the button for address clicked
     $('#address, #address2').on('click', function () {
         $.ajax({

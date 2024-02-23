@@ -11,7 +11,7 @@ from provisionspall_web.api.v1.views import app_views
 
 app.register_blueprint(app_views)
 
-cors = CORS(app, resources={r'/api/v1/*': {'origins': ['http://localhost:5000', 'https://provisionspall.onrender.com']}})
+cors = CORS(app, resources={r'/api/v1/*': {'origins': ['http://localhost:5000', 'https://provisionspall-hwvs.onrender.com']}})
 
 
 @app.teardown_appcontext
@@ -31,7 +31,7 @@ def not_found(error):
 def landing_page():
     """This is the route for our landing page"""
 
-    return redirect("/market") 
+    return redirect("https://cadatech-portfolio.vercel.app/") 
     # return render_template('marketplace.html', cache_id=uuid.uuid4())
 
 

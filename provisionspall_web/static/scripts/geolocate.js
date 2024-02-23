@@ -1,5 +1,6 @@
 $(function () {
-    let url = "https://provisionspall.onrender.com/api/v1";
+    let url = "https://provisionspall-hwvs.onrender.com/api/v1";
+    // let url = "http://localhost:5000/api/v1";
     $('#store').on('click', function () {
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(

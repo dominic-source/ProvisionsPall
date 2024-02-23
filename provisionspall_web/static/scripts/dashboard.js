@@ -2,8 +2,8 @@ $(function () {
   // Make sure to store all values of store here before proceeding
 
   // The url of the application
-  let url = "https://provisionspall.onrender.com/api/v1";
-
+  let url = "https://provisionspall-hwvs.onrender.com/api/v1";
+  // let url = "http://localhost:5000/api/v1"
   // A function to generate unique Id for elements
   function generateUUID() {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(

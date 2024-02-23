@@ -78,7 +78,9 @@ const mapStyle = [{
 
 function initMap() {
     get_id = document.getElementById('map').dataset.ids;
-    let url = "https://provisionspall.onrender.com/api/v1/locate/" + get_id;
+    let url = "https://provisionspall-hwvs.onrender.com/api/v1/locate/" + get_id;
+    // let url = "http://localhost:5000/api/v1/locate/" + get_id;
+
     fetch(url)
         .then((response) => {
             if (!response.ok) {
